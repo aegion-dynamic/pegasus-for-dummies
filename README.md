@@ -2,6 +2,8 @@
 
 Open source ecosystem contributor guide for [Pegasus](https://github.com/pegasus-eln/pegasus), an open standard Electronic Lab Notebook (ELN) system.
 
+**Copyright © Aegion Dynamic. All rights reserved.** This repository and the book content are protected by copyright. Others are not permitted to reuse the name, materials, or derivatives without permission. See [COPYRIGHT](COPYRIGHT) and [LICENSE](LICENSE) for full terms and restrictions.
+
 ## Building the book
 
 This is an [mdBook](https://rust-lang.github.io/mdBook/) project. To build and serve locally:

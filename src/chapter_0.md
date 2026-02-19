@@ -39,3 +39,7 @@ Weighted total (max 5.0): **4.2+** winning, **3.8–4.1** strong finalist, **&lt
 - **Implement the standard or build on the API** → Go to [Chapter 2](./chapter_2.md).
 - **Prepare for the hackathon** → Read [Chapters 3–4](./chapter_3.md) (ELNs at Work, Hackathon Guide) and the evaluation notes there; then [Chapters 6–8](./chapter_6.md) (Inspirations, Idea Banks).
 - **Explore idea banks** → See [Chapter 7](./chapter_7.md) (BioProtocol / DeSci) and [Chapter 8](./chapter_8.md) (LabOP).
+
+---
+
+*© Aegion Dynamic. See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*

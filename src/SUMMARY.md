@@ -9,3 +9,4 @@
 - [Inspirations and Learning](./chapter_6.md)
 - [Idea Bank: BioProtocol and Decentralized Science](./chapter_7.md)
 - [Idea Bank: LabOP](./chapter_8.md)
+- [Copyright and Legal Notice](./copyright.md)
