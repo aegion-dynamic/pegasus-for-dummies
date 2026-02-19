@@ -6,4 +6,3 @@ description = "Open source ecosystem contributor guide for Pegasus ELN. © Aegio
 
 [output.html]
 git-repository-url = "https://github.com/pegasus-eln/pegasus-for-dummies"
-git-repository-icon = "fa-github"
