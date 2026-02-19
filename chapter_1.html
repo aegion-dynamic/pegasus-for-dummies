@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ELNs and AI in Life Sciences - Pegasus for Dummies</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Open source ecosystem contributor guide for Pegasus ELN. © Aegion Dynamic.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Pegasus for Dummies</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/pegasus-eln/pegasus-for-dummies" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="elns-and-ai-in-life-sciences"><a class="header" href="#elns-and-ai-in-life-sciences">ELNs and AI in Life Sciences</a></h1>
+<p>This book is the open source ecosystem contributor guide for <strong>Pegasus</strong>, an open standard Electronic Lab Notebook (ELN) system. This chapter sets the context for ELNs and AI in life sciences.</p>
+<h2 id="what-are-electronic-lab-notebooks"><a class="header" href="#what-are-electronic-lab-notebooks">What are Electronic Lab Notebooks?</a></h2>
+<p>An <strong>electronic lab notebook (ELN)</strong> is a digital software tool that replaces traditional paper notebooks for recording research. It provides a structured, secure way to document experiments, protocols, observations, and results. ELNs allow researchers to enter text and attach rich data in digital form (e.g. images, graphs, raw data files), and often include templates or forms to standardize entries. Unlike paper notebooks, ELNs make all content searchable and version-controlled. They can be synced with other lab software (like sample inventories or LIMS) and maintain tamper-proof audit trails. In short, an ELN is a modern, searchable laboratory journal that captures everything about an experiment in one place.</p>
+<p>ELNs offer many advantages over paper. They simplify data sharing and backup, since entries are stored digitally. For example, experiments recorded in ELNs are easier to search by keyword or date. Lab notebooks can include fine-grained access controls and audit logs, so every change is tracked. Importantly, ELNs can directly import digital data from instruments (instead of printing and stapling). In practice, a scientist can upload microscope images, sensor readouts, or spreadsheet results right into the experiment record. Multiple users can collaborate on the same notebook, tagging each other's work and commenting on entries. These features make ELNs a centralized hub for research data and improve reproducibility by keeping protocols, data and analysis together.</p>
+<h2 id="how-elns-are-used-in-life-sciences"><a class="header" href="#how-elns-are-used-in-life-sciences">How ELNs are Used in Life Sciences</a></h2>
+<p>In biology and chemistry labs, ELNs serve as the daily research workspace. Scientists plan and record experiments by writing down protocols (materials, methods, objectives) and then logging real-time observations and data. For example, a researcher might write the background and step-by-step procedure for a gel experiment, and then enter gel image results once the run is finished. All digital outputs (images of gels or cells, instrument plots, calculations in spreadsheets) are attached to the relevant experiment page. Because the data are structured, teams can quickly compare experiments, spot trends or anomalies over time, and ensure nothing is lost. On any given day, a user might create a new notebook entry, paste in the experimental procedure, type or voice-record observations, upload photos or CSV files, and later compile results and conclusions in one section. ELNs also support cross-linking: one entry can link to previous related experiments, or to inventory entries listing specific samples and reagents used.</p>
+<p>Undergraduates and lab technicians likewise use ELNs to follow standard templates for their experiments. Instead of writing in paper binders, a student can use an ELN "page" to fill in observed values, snap a photo of a reading, or paste in an output graph. This encourages good lab practices from the start and makes it easy to later retrieve their data. In academic research, ELNs help disparate teams share methods and results, even across institutions. For instance, one group's ELN entry on a cell culture protocol can be copied and reused by another group, with full provenance and updates tracked. By centralizing all experiment details (from methods to raw data), ELNs improve collaboration and compliance: nothing is hidden in filed notes, and supervisors can audit progress in real time.</p>
+<h2 id="different-types-of-data-in-an-eln"><a class="header" href="#different-types-of-data-in-an-eln">Different Types of Data in an ELN</a></h2>
+<p>ELNs can store many kinds of research data in one place. Typical content includes:</p>
+<ul>
+<li>
+<p><strong>Textual notes and protocols:</strong> Experiment descriptions, procedures, and conclusions are written as rich text entries. Researchers may write protocols in the notebook or attach documents, then record step-by-step methods and observations.</p>
+</li>
+<li>
+<p><strong>Images and media:</strong> Photographs of experimental setups, microscope images, electrophoresis gels, or spectra are uploaded directly. Images can be annotated (e.g. marking features on a photo). ELNs even allow uploading photos taken on mobile devices during the experiment.</p>
+</li>
+<li>
+<p><strong>Data files and tables:</strong> Numerical data often come as spreadsheets, CSV files, or instrument outputs. These raw data files can be attached to the entry. For example, an ELN page might include an Excel file of measurements and a MATLAB graph, stored and even viewable inside the notebook. Because ELNs are digital, they can host large raw datasets without physical limits.</p>
+</li>
+<li>
+<p><strong>Metadata and links:</strong> Entries automatically include metadata like timestamps and authorship. Scientists can also tag entries or link to related pages (e.g. linking this week's experiment to a prior one). Many ELNs integrate with inventory/sample databases: entering a sample ID can record that sample in the notebook and link back to its database record.</p>
+</li>
+<li>
+<p><strong>Graphs and analysis results:</strong> Final results (charts, plots, statistical analyses) are saved as figures or PDFs attached to the entry. An ELN can also embed interactive elements (e.g. live links to analysis scripts or editable spreadsheets).</p>
+</li>
+</ul>
+<p>An example ELN page organized into sections: Methodology (green), Raw Data/Analysis (blue), and Results (red). This illustrates how an experiment record might be structured with text and attachments. ELNs let researchers upload spreadsheets or image files to each section (for calculations or figures) and tag entries by type or project.</p>
+<p><img src="images/eln-guide/eln-page-sections.png" alt="Example ELN page with Methodology, Raw Data/Analysis, and Results sections" /></p>
+<p><em>Figure: An example ELN page organized into sections (Methodology, Raw Data/Analysis, Results).</em></p>
+<p>ELNs support uploading images and time-stamped notes directly from the lab. For instance, one can take a photo of a gel or experimental apparatus and insert it into the "Observations" section. ELNs allow direct incorporation of instrument data and images into entries, and users can even use mobile apps to capture handwritten notes or photos during an experiment.</p>
+<p>Raw data (gels, spectra, spreadsheets) can be attached to ELN pages. In the example below, a gel image and an Excel calculation file are shown. ELNs make it easy to review and comment on raw data in context. Research shows that ELN entries often contain sections for uploading raw data or analysis files (images, Office files, etc.) which can then be annotated or processed within the ELN.</p>
+<p><img src="images/eln-guide/eln-raw-data.png" alt="Raw data attached to an ELN page: gel image and Excel file" /></p>
+<p><em>Figure: Raw data (e.g. gel image, spreadsheet) attached to an ELN page.</em></p>
+<p>Protocols and experimental design details are also stored in the notebook. The figure below shows a section of an ELN entry with the experiment's Background, Objective, and Protocol steps. Protocols are typically written as rich text or document attachments in an ELN. Some systems link this protocol to inventory lists of reagents and samples, ensuring every material used is tracked.</p>
+<p><img src="images/eln-guide/eln-protocol.png" alt="ELN entry with Background, Objective, and Protocol steps" /></p>
+<p><em>Figure: Protocols and experimental design in an ELN entry.</em></p>
+<p>Experimental design—hypotheses, variables, conditions, and how an experiment is structured—can also be captured in the notebook. The figure below shows how design elements are recorded alongside protocols, so that the rationale and plan for each experiment are preserved and searchable.</p>
+<p><img src="images/eln-guide/experiment-design.png" alt="Experiment design captured in an ELN entry" /></p>
+<p><em>Figure: Experiment design (objectives, variables, conditions) in an ELN.</em></p>
+<h2 id="ai--lab-notebooks-hackathon-ideas"><a class="header" href="#ai--lab-notebooks-hackathon-ideas">AI &amp; Lab Notebooks: Hackathon Ideas</a></h2>
+<p>The following ideas leverage the open, local architecture of the Pegasus ELN and can inspire ecosystem contributions and hackathon projects.</p>
+<h3 id="open-standards--fair-data"><a class="header" href="#open-standards--fair-data">Open Standards &amp; FAIR Data</a></h3>
+<p>Pegasus ELN uses open data formats and APIs. Hackathon teams can leverage these by building AI "skills" or parsers that read the JSON/CSV exports of notebook entries. Ensuring data follows FAIR principles (with metadata tags and persistent IDs) makes it easier for AI tools to interpret. Because the ELN is open-source, anyone can extend it or contribute plugins. For example, one project might write a module that scans the ELN JSON to extract a timeline of reagent usage, or validates entries against a standard template.</p>
+<h3 id="local-llm-integration"><a class="header" href="#local-llm-integration">Local LLM Integration</a></h3>
+<p>Use local large language model frameworks (like Ollama or LangChain) to connect an LLM with the notebook data. For instance, teams could use OpenClaw (formerly Moltbot), an open-source AI agent, to create a lab assistant that "reads" your ELN. OpenClaw runs locally and can execute tasks on your machine. A hackathon challenge could be: "Build an OpenClaw-style agent that answers questions like 'What was the protocol for Experiment 7?' or 'Plot the time series of pH readings' by querying the ELN." Because everything is local, data never leaves the machine. This is similar to ELNs already embedding AI chat assistants for scientists.</p>
+<h3 id="mlai-for-data-analysis"><a class="header" href="#mlai-for-data-analysis">ML/AI for Data Analysis</a></h3>
+<p>Apply machine learning to common life-science datasets in the ELN. Ideas include training a CNN to classify cell images attached in notebook entries, using NLP to automatically summarize an experiment's results from the notes, or applying anomaly detection on time-course data. Since ELNs structure data across experiments, teams can aggregate past entries to train models. For example, having structured experiment data lets teams "identify trends, anomalies, and performance metrics across projects over time." A concrete project could use existing ELN data to predict the outcome of a procedure or to flag inconsistent entries.</p>
+<h3 id="interactive-knowledge-graphs"><a class="header" href="#interactive-knowledge-graphs">Interactive Knowledge Graphs</a></h3>
+<p>Create a knowledge graph that links items in the notebook: nodes could represent experiments, samples, genes, chemicals, etc., and edges capture relationships (e.g. "sample X was used in experiment Y"). The graph could be visualized or queried interactively. In life sciences, such graphs are powerful: they've been used to prioritize disease-related genes, suggest drug repurposing opportunities, or find new drug-target interactions. For a hackathon, a team might build a graph that automatically ingests the ELN's metadata and creates an interactive explorer, helping scientists ask questions like "Which experiments used Compound A?" or "Which samples relate to a given cell line?"</p>
+<h3 id="ai-agents-for-lab-workflows"><a class="header" href="#ai-agents-for-lab-workflows">AI Agents for Lab Workflows</a></h3>
+<p>Inspired by the OpenClaw example, teams can design an AI workflow manager. For example, an agent could monitor the ELN API and trigger alerts or actions: if the agent reads a note about a long incubation, it might schedule a reminder; or if it detects missing data, it could prompt the user. By integrating with messaging apps, the agent could allow voice or chat interaction ("Hey AI, summarize yesterday's chromatography run"). Essentially, this is an extension of a chatbot assistant tailored to scientific workflows.</p>
+<h3 id="opendistributed-science"><a class="header" href="#opendistributed-science">Open/Distributed Science</a></h3>
+<p>Explore connecting ELN data to open science platforms. One idea is to integrate with Bio Protocol (BIO) – a blockchain-based DeSci platform where research can be shared and tokenized. A hackathon task could be to design a way to "publish" parts of a lab notebook onto a decentralized network (e.g. save a protocol with a persistent identifier). Teams could also consider the ethos of open-notebook science, where all data (even failed experiments) are made public in real time. For example, a project could sync select ELN entries to a public repository or wiki, enabling community feedback and distributed collaboration. This connects lab work with broader citizen science and open-data movements.</p>
+<p>Each of these ideas leverages the open, local architecture of the Pegasus ELN. Because the system's data format and API are open, contributors can freely build custom AI modules, chatbots, or graph tools that plug into the notebook. By drawing inspiration from OpenClaw/Moltbot agents, FAIR data principles, and decentralized science platforms, participants can create novel AI-powered features for life-science research. The goal is to spark creativity: for instance, one team might develop an LLM "protocol advisor," another might make an image-analysis plug-in, while another builds a knowledge-graph front-end for the lab. All of these would showcase how AI can enhance the functionality of an electronic lab notebook in a modern research setting.</p>
+<h2 id="references-and-further-reading"><a class="header" href="#references-and-further-reading">References and further reading</a></h2>
+<ul>
+<li><a href="https://www.labkey.com/what-is-an-electronic-lab-notebook/">What Is an Electronic Lab Notebook? | LabKey</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11189195/">Ten simple rules for implementing electronic lab notebooks (ELNs) - PMC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Electronic_lab_notebook">Electronic lab notebook - Wikipedia</a></li>
+<li><a href="https://help.labarchives.com/hc/en-us/articles/34329886396820-Example-Notebook-Page-Recording-an-Experiment">Example Notebook Page - Recording an Experiment – LabArchives</a></li>
+<li><a href="https://researchdata.wisc.edu/tools/the-big-picture-of-data-management-in-an-electronic-lab-notebook-eln/">The Big Picture of Data Management in an Electronic Lab Notebook (ELN) - Research Data Services</a></li>
+<li><a href="https://www.scientificamerican.com/article/moltbot-is-an-open-source-ai-agent-that-runs-your-computer/">OpenClaw is an open-source AI agent that runs your computer | Scientific American</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7327409/">Constructing knowledge graphs and their biomedical applications - PMC</a></li>
+<li><a href="https://help.wealthsimple.com/hc/en-ca/articles/41701045785883-Bio-Protocol-BIO">Bio Protocol (BIO) – Help Centre</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Open-notebook_science">Open-notebook science - Wikipedia</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_0.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_0.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

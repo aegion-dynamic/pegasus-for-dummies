@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ELNs at Work - Pegasus for Dummies</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Open source ecosystem contributor guide for Pegasus ELN. © Aegion Dynamic.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Pegasus for Dummies</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/pegasus-eln/pegasus-for-dummies" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="elns-at-work"><a class="header" href="#elns-at-work">ELNs at Work</a></h1>
+<p>Electronic Lab Notebooks are <strong>not just digital Word documents</strong>. They function as <strong>operational systems for scientific workflows</strong>, bridging experimental planning, execution, data capture, and collaboration.</p>
+<p>Below are the <strong>core operational areas where ELNs are used in real laboratories</strong>.</p>
+<h2 id="experimental-planning-and-protocol-management"><a class="header" href="#experimental-planning-and-protocol-management">Experimental Planning and Protocol Management</a></h2>
+<h3 id="what-scientists-do"><a class="header" href="#what-scientists-do">What scientists do</a></h3>
+<ul>
+<li>Write step-by-step experimental protocols (e.g., PCR, microscopy imaging, cell culture).</li>
+<li>Create templates for common procedures (SOPs).</li>
+<li>Version-control protocols when methods change.</li>
+</ul>
+<h3 id="why-elns-matter"><a class="header" href="#why-elns-matter">Why ELNs matter</a></h3>
+<ul>
+<li>Ensures <strong>reproducibility</strong>: everyone in the lab follows the same procedure.</li>
+<li>Allows teams to compare how protocol changes affect results.</li>
+<li>Central repository prevents "tribal knowledge" loss when students leave.</li>
+</ul>
+<h3 id="typical-eln-content"><a class="header" href="#typical-eln-content">Typical ELN content</a></h3>
+<ul>
+<li>Structured protocol steps</li>
+<li>Materials lists</li>
+<li>Timing parameters</li>
+<li>Safety notes</li>
+<li>Attachments (PDFs, images, instrument settings)</li>
+</ul>
+<h2 id="recording-experimental-observations-and-results"><a class="header" href="#recording-experimental-observations-and-results">Recording Experimental Observations and Results</a></h2>
+<h3 id="what-scientists-do-1"><a class="header" href="#what-scientists-do-1">What scientists do</a></h3>
+<ul>
+<li>Log daily experimental notes ("lab journal entries").</li>
+<li>Capture raw observations: unexpected results, contamination, anomalies.</li>
+<li>Attach data files and images from instruments.</li>
+</ul>
+<h3 id="why-elns-matter-1"><a class="header" href="#why-elns-matter-1">Why ELNs matter</a></h3>
+<ul>
+<li>Prevents transcription errors and lost notebooks.</li>
+<li>Enables search across years of experiments.</li>
+<li>Creates structured provenance of scientific work.</li>
+</ul>
+<h3 id="typical-eln-content-1"><a class="header" href="#typical-eln-content-1">Typical ELN content</a></h3>
+<ul>
+<li>Free-text notes</li>
+<li>Structured measurements</li>
+<li>Instrument outputs (CSV, microscopy images, spectra)</li>
+<li>Metadata (temperature, reagent batch, timestamps)</li>
+</ul>
+<h2 id="data-management-and-result-curation"><a class="header" href="#data-management-and-result-curation">Data Management and Result Curation</a></h2>
+<h3 id="what-scientists-do-2"><a class="header" href="#what-scientists-do-2">What scientists do</a></h3>
+<ul>
+<li>Tag key findings.</li>
+<li>Compare experiments across time.</li>
+<li>Track experiment lineage ("this result came from this sample using this protocol").</li>
+</ul>
+<h3 id="why-elns-matter-2"><a class="header" href="#why-elns-matter-2">Why ELNs matter</a></h3>
+<ul>
+<li>Enables trend discovery across experiments.</li>
+<li>Facilitates project retrospectives and scientific reporting.</li>
+<li>Helps supervisors review student progress.</li>
+</ul>
+<h3 id="typical-eln-content-2"><a class="header" href="#typical-eln-content-2">Typical ELN content</a></h3>
+<ul>
+<li>Experiment graphs and summary tables</li>
+<li>Tags (e.g., "failed", "optimized", "publishable")</li>
+<li>Links between experiments and datasets</li>
+</ul>
+<h2 id="sample-and-inventory-tracking"><a class="header" href="#sample-and-inventory-tracking">Sample and Inventory Tracking</a></h2>
+<h3 id="what-scientists-do-3"><a class="header" href="#what-scientists-do-3">What scientists do</a></h3>
+<ul>
+<li>Track biological samples, chemicals, reagents, antibodies, DNA plasmids, cell lines.</li>
+<li>Monitor storage locations (freezers, racks, plates).</li>
+<li>Track batch numbers and expiry dates.</li>
+</ul>
+<h3 id="why-elns-matter-3"><a class="header" href="#why-elns-matter-3">Why ELNs matter</a></h3>
+<ul>
+<li>Prevents wasted reagents and mislabeled samples.</li>
+<li>Ensures traceability for regulatory and reproducibility requirements.</li>
+<li>Links experimental results to specific reagent lots.</li>
+</ul>
+<h3 id="typical-eln-content-3"><a class="header" href="#typical-eln-content-3">Typical ELN content</a></h3>
+<ul>
+<li>Sample IDs and lineage</li>
+<li>Storage location metadata</li>
+<li>Barcode IDs</li>
+<li>Quantity usage logs</li>
+</ul>
+<h2 id="instrument-and-automation-integration"><a class="header" href="#instrument-and-automation-integration">Instrument and Automation Integration</a></h2>
+<h3 id="what-scientists-do-4"><a class="header" href="#what-scientists-do-4">What scientists do</a></h3>
+<ul>
+<li>Connect ELNs to instruments (sequencers, microscopes, spectrometers).</li>
+<li>Automatically ingest machine outputs.</li>
+<li>Log machine settings.</li>
+</ul>
+<h3 id="why-elns-matter-4"><a class="header" href="#why-elns-matter-4">Why ELNs matter</a></h3>
+<ul>
+<li>Eliminates manual copying of results.</li>
+<li>Ensures provenance of computational pipelines.</li>
+<li>Enables automation and robotics workflows.</li>
+</ul>
+<h3 id="typical-eln-content-4"><a class="header" href="#typical-eln-content-4">Typical ELN content</a></h3>
+<ul>
+<li>Raw instrument output files</li>
+<li>Instrument configuration metadata</li>
+<li>Run logs</li>
+</ul>
+<h2 id="collaboration-and-team-coordination"><a class="header" href="#collaboration-and-team-coordination">Collaboration and Team Coordination</a></h2>
+<h3 id="what-scientists-do-5"><a class="header" href="#what-scientists-do-5">What scientists do</a></h3>
+<ul>
+<li>Share experiment records with collaborators.</li>
+<li>Comment and review experiments.</li>
+<li>Assign tasks and track progress.</li>
+</ul>
+<h3 id="why-elns-matter-5"><a class="header" href="#why-elns-matter-5">Why ELNs matter</a></h3>
+<ul>
+<li>Supports distributed teams and remote collaboration.</li>
+<li>Supervisors can review student lab work in real time.</li>
+<li>Reduces version conflicts and email chaos.</li>
+</ul>
+<h3 id="typical-eln-content-5"><a class="header" href="#typical-eln-content-5">Typical ELN content</a></h3>
+<ul>
+<li>User comments and annotations</li>
+<li>Task assignments</li>
+<li>Project dashboards</li>
+</ul>
+<h2 id="regulatory-compliance-and-audit-trails-industry--clinical-labs"><a class="header" href="#regulatory-compliance-and-audit-trails-industry--clinical-labs">Regulatory Compliance and Audit Trails (Industry &amp; Clinical Labs)</a></h2>
+<h3 id="what-scientists-do-6"><a class="header" href="#what-scientists-do-6">What scientists do</a></h3>
+<ul>
+<li>Sign off on experiments.</li>
+<li>Maintain immutable audit logs.</li>
+<li>Export documentation for regulators.</li>
+</ul>
+<h3 id="why-elns-matter-6"><a class="header" href="#why-elns-matter-6">Why ELNs matter</a></h3>
+<ul>
+<li>Required for pharma, clinical, and manufacturing research (GLP, GMP, ISO).</li>
+<li>Ensures data integrity and legal traceability.</li>
+<li>Prevents fraud or data tampering.</li>
+</ul>
+<h3 id="typical-eln-content-6"><a class="header" href="#typical-eln-content-6">Typical ELN content</a></h3>
+<ul>
+<li>Electronic signatures</li>
+<li>Time-stamped logs</li>
+<li>Access control metadata</li>
+</ul>
+<h2 id="knowledge-management-and-institutional-memory"><a class="header" href="#knowledge-management-and-institutional-memory">Knowledge Management and Institutional Memory</a></h2>
+<h3 id="what-scientists-do-7"><a class="header" href="#what-scientists-do-7">What scientists do</a></h3>
+<ul>
+<li>Store historical experiments and institutional protocols.</li>
+<li>Search across years of research.</li>
+<li>Train new lab members using past notebooks.</li>
+</ul>
+<h3 id="why-elns-matter-7"><a class="header" href="#why-elns-matter-7">Why ELNs matter</a></h3>
+<ul>
+<li>Prevents knowledge loss when researchers graduate.</li>
+<li>Enables longitudinal research analysis.</li>
+<li>Creates searchable scientific memory for an institution.</li>
+</ul>
+<h3 id="typical-eln-content-7"><a class="header" href="#typical-eln-content-7">Typical ELN content</a></h3>
+<ul>
+<li>Long-term project archives</li>
+<li>Training protocols</li>
+<li>Historical datasets</li>
+</ul>
+<h2 id="integration-with-broader-research-systems-lims-data-lakes-publications"><a class="header" href="#integration-with-broader-research-systems-lims-data-lakes-publications">Integration with Broader Research Systems (LIMS, Data Lakes, Publications)</a></h2>
+<h3 id="what-scientists-do-8"><a class="header" href="#what-scientists-do-8">What scientists do</a></h3>
+<ul>
+<li>Sync ELNs with:
+<ul>
+<li>LIMS (Laboratory Information Management Systems)</li>
+<li>Data repositories</li>
+<li>Publication pipelines</li>
+</ul>
+</li>
+<li>Export data for papers and patents.</li>
+</ul>
+<h3 id="why-elns-matter-8"><a class="header" href="#why-elns-matter-8">Why ELNs matter</a></h3>
+<ul>
+<li>Supports FAIR data principles (Findable, Accessible, Interoperable, Reusable).</li>
+<li>Bridges wet-lab work with computational pipelines.</li>
+</ul>
+<h3 id="typical-eln-content-8"><a class="header" href="#typical-eln-content-8">Typical ELN content</a></h3>
+<ul>
+<li>Metadata exports</li>
+<li>API connections</li>
+<li>Dataset packages</li>
+</ul>
+<h2 id="project-management-for-research-programs"><a class="header" href="#project-management-for-research-programs">Project Management for Research Programs</a></h2>
+<h3 id="what-scientists-do-9"><a class="header" href="#what-scientists-do-9">What scientists do</a></h3>
+<ul>
+<li>Track milestones in multi-month experiments.</li>
+<li>Manage multi-experiment research programs.</li>
+<li>Coordinate interdisciplinary projects (biology + chemistry + ML).</li>
+</ul>
+<h3 id="why-elns-matter-9"><a class="header" href="#why-elns-matter-9">Why ELNs matter</a></h3>
+<ul>
+<li>Makes research programs observable like software projects.</li>
+<li>Helps principal investigators manage multiple students and experiments.</li>
+</ul>
+<h3 id="typical-eln-content-9"><a class="header" href="#typical-eln-content-9">Typical ELN content</a></h3>
+<ul>
+<li>Project timelines</li>
+<li>Experiment hierarchies</li>
+<li>Milestone markers</li>
+</ul>
+<h2 id="key-insight-for-hackathon-participants"><a class="header" href="#key-insight-for-hackathon-participants">Key Insight for Hackathon Participants</a></h2>
+<p><strong>An ELN is not just a notebook. It is:</strong></p>
+<ul>
+<li>A scientific data lake</li>
+<li>A provenance system</li>
+<li>A workflow engine</li>
+<li>A collaboration platform</li>
+<li>A regulatory artifact</li>
+<li>A knowledge graph substrate</li>
+</ul>
+<p>This makes it <strong>an extremely rich target for AI plugins</strong>.</p>
+<h2 id="hackathon-relevant-ai-opportunities-from-these-usage-areas"><a class="header" href="#hackathon-relevant-ai-opportunities-from-these-usage-areas">Hackathon-Relevant AI Opportunities from These Usage Areas</a></h2>
+<h3 id="ai-for-experimental-understanding"><a class="header" href="#ai-for-experimental-understanding">AI for Experimental Understanding</a></h3>
+<ul>
+<li>Summarize daily lab logs into weekly reports.</li>
+<li>Detect anomalies in experiment logs.</li>
+</ul>
+<h3 id="ai-for-protocol-intelligence"><a class="header" href="#ai-for-protocol-intelligence">AI for Protocol Intelligence</a></h3>
+<ul>
+<li>Auto-generate protocol drafts from natural language goals.</li>
+<li>Compare protocol versions and predict outcomes.</li>
+</ul>
+<h3 id="ai-for-sample-intelligence"><a class="header" href="#ai-for-sample-intelligence">AI for Sample Intelligence</a></h3>
+<ul>
+<li>Detect missing metadata.</li>
+<li>Recommend reagent substitutions.</li>
+</ul>
+<h3 id="ai-for-instrument-data"><a class="header" href="#ai-for-instrument-data">AI for Instrument Data</a></h3>
+<ul>
+<li>Auto-annotate raw machine data with experiment context.</li>
+<li>Build semantic indexing of datasets.</li>
+</ul>
+<h3 id="ai-for-collaboration"><a class="header" href="#ai-for-collaboration">AI for Collaboration</a></h3>
+<ul>
+<li>Conversational assistants that answer: <em>"What did we try last month on this cell line?"</em></li>
+</ul>
+<h3 id="ai-for-compliance"><a class="header" href="#ai-for-compliance">AI for Compliance</a></h3>
+<ul>
+<li>Flag missing signatures or documentation gaps.</li>
+</ul>
+<h3 id="ai-for-knowledge-graphs"><a class="header" href="#ai-for-knowledge-graphs">AI for Knowledge Graphs</a></h3>
+<ul>
+<li>Build experiment-sample-protocol-result graphs.</li>
+<li>Enable graph queries and visualization.</li>
+</ul>
+<h2 id="positioning-for-pegasus"><a class="header" href="#positioning-for-pegasus">Positioning for Pegasus</a></h2>
+<blockquote>
+<p>Pegasus is a local-first, open-standard ELN platform that exposes this scientific operational data via a local API. This buildathon invites participants to explore how AI systems can interact with structured scientific workflows, build intelligent assistants, and create new interfaces for distributed scientific knowledge.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

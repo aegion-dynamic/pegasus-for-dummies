@@ -1,0 +1,1203 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Pegasus for Dummies</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Open source ecosystem contributor guide for Pegasus ELN. © Aegion Dynamic.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Pegasus for Dummies</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/pegasus-eln/pegasus-for-dummies" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="start-here"><a class="header" href="#start-here">Start Here</a></h1>
+<p>This book is the <strong>open source ecosystem contributor guide</strong> for <strong>Pegasus</strong>, an open standard Electronic Lab Notebook (ELN) system. It sets context for ELNs and AI in life sciences, explains the ELN open standard, and supports hackathon participants and implementers building on Pegasus.</p>
+<h2 id="who-this-is-for"><a class="header" href="#who-this-is-for">Who this is for</a></h2>
+<ul>
+<li><strong>Ecosystem contributors</strong> — anyone extending or integrating with Pegasus</li>
+<li><strong>Hackathon and buildathon participants</strong> — teams building AI modules, plugins, or tools that use ELN data</li>
+<li><strong>Implementers</strong> — developers adopting the open standard or building compatible tools</li>
+</ul>
+<h2 id="how-to-use-this-book"><a class="header" href="#how-to-use-this-book">How to use this book</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Chapter</th><th>What you'll find</th></tr></thead><tbody>
+<tr><td><strong>1. ELNs and AI in Life Sciences</strong></td><td>Context and hackathon ideas: what ELNs are, how they're used, and AI opportunities.</td></tr>
+<tr><td><strong>2. The ELN Open Standard</strong></td><td>XML spec, primitives, API: root structure, metadata, content, tables, protocols (LabOP), knowledge graph, audit.</td></tr>
+<tr><td><strong>3. ELNs at Work</strong></td><td>How life-science practitioners use ELNs day-to-day (planning, recording, data management, inventory, instruments, collaboration, compliance, knowledge management, integration, project management).</td></tr>
+<tr><td><strong>4. Hackathon Guide</strong></td><td>Workflows, data types, AI extension ideas, and what buildathon judges look for.</td></tr>
+<tr><td><strong>5. Pegasus API</strong></td><td>API reference for building on Pegasus (TBA).</td></tr>
+<tr><td><strong>6. Inspirations and Learning</strong></td><td>Creators, tracks, and patterns from the ecosystem (ELN tutorials, research workflows, open science, Jupyter/Git).</td></tr>
+<tr><td><strong>7. Idea Bank: BioProtocol and Decentralized Science</strong></td><td>In-depth coverage of open protocols, DeSci, and reproducibility; integrating with Pegasus.</td></tr>
+<tr><td><strong>8. Idea Bank: LabOP</strong></td><td>In-depth coverage of the LabOP protocol standard and how it fits with the Pegasus ELN.</td></tr>
+</tbody></table>
+</div>
+<h3 id="what-buildathon-judges-care-about"><a class="header" href="#what-buildathon-judges-care-about">What buildathon judges care about</a></h3>
+<p>When evaluating projects, judges score five areas (substance over polish; evidence required):</p>
+<ul>
+<li><strong>Scientific utility (30%)</strong> — Solves real researcher pain points (e.g. reproducibility, provenance).</li>
+<li><strong>Local-first (25%)</strong> — Offline-capable; data stays on the researcher's machine; local models (e.g. Ollama).</li>
+<li><strong>Open standards (20%)</strong> — Correct use of Pegasus data formats and local API (see <a href="./chapter_2.html">Chapter 2</a> and <a href="./chapter_5.html">Pegasus API</a>).</li>
+<li><strong>Extensibility (15%)</strong> — Others can build on or extend the project; clear structure and docs.</li>
+<li><strong>Creativity (10%)</strong> — Novel use of AI/ML with notebook data.</li>
+</ul>
+<p>Weighted total (max 5.0): <strong>4.2+</strong> winning, <strong>3.8–4.1</strong> strong finalist, <strong>&lt;3.0</strong> participation. Details are in the <a href="./chapter_4.html#evaluation-at-a-glance">Hackathon Guide</a>.</p>
+<h2 id="i-want-to"><a class="header" href="#i-want-to">I want to...</a></h2>
+<ul>
+<li><strong>Understand ELNs and get hackathon ideas</strong> → Start with <a href="./chapter_1.html">Chapter 1</a>.</li>
+<li><strong>Implement the standard or build on the API</strong> → Go to <a href="./chapter_2.html">Chapter 2</a>.</li>
+<li><strong>Prepare for the hackathon</strong> → Read <a href="./chapter_3.html">Chapters 3–4</a> (ELNs at Work, Hackathon Guide) and the evaluation notes there; then <a href="./chapter_6.html">Chapters 6–8</a> (Inspirations, Idea Banks).</li>
+<li><strong>Explore idea banks</strong> → See <a href="./chapter_7.html">Chapter 7</a> (BioProtocol / DeSci) and <a href="./chapter_8.html">Chapter 8</a> (LabOP).</li>
+</ul>
+<hr />
+<p><em>© Aegion Dynamic. See <a href="./copyright.html">Copyright and Legal Notice</a> for full terms and repository information.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="elns-and-ai-in-life-sciences"><a class="header" href="#elns-and-ai-in-life-sciences">ELNs and AI in Life Sciences</a></h1>
+<p>This book is the open source ecosystem contributor guide for <strong>Pegasus</strong>, an open standard Electronic Lab Notebook (ELN) system. This chapter sets the context for ELNs and AI in life sciences.</p>
+<h2 id="what-are-electronic-lab-notebooks"><a class="header" href="#what-are-electronic-lab-notebooks">What are Electronic Lab Notebooks?</a></h2>
+<p>An <strong>electronic lab notebook (ELN)</strong> is a digital software tool that replaces traditional paper notebooks for recording research. It provides a structured, secure way to document experiments, protocols, observations, and results. ELNs allow researchers to enter text and attach rich data in digital form (e.g. images, graphs, raw data files), and often include templates or forms to standardize entries. Unlike paper notebooks, ELNs make all content searchable and version-controlled. They can be synced with other lab software (like sample inventories or LIMS) and maintain tamper-proof audit trails. In short, an ELN is a modern, searchable laboratory journal that captures everything about an experiment in one place.</p>
+<p>ELNs offer many advantages over paper. They simplify data sharing and backup, since entries are stored digitally. For example, experiments recorded in ELNs are easier to search by keyword or date. Lab notebooks can include fine-grained access controls and audit logs, so every change is tracked. Importantly, ELNs can directly import digital data from instruments (instead of printing and stapling). In practice, a scientist can upload microscope images, sensor readouts, or spreadsheet results right into the experiment record. Multiple users can collaborate on the same notebook, tagging each other's work and commenting on entries. These features make ELNs a centralized hub for research data and improve reproducibility by keeping protocols, data and analysis together.</p>
+<h2 id="how-elns-are-used-in-life-sciences"><a class="header" href="#how-elns-are-used-in-life-sciences">How ELNs are Used in Life Sciences</a></h2>
+<p>In biology and chemistry labs, ELNs serve as the daily research workspace. Scientists plan and record experiments by writing down protocols (materials, methods, objectives) and then logging real-time observations and data. For example, a researcher might write the background and step-by-step procedure for a gel experiment, and then enter gel image results once the run is finished. All digital outputs (images of gels or cells, instrument plots, calculations in spreadsheets) are attached to the relevant experiment page. Because the data are structured, teams can quickly compare experiments, spot trends or anomalies over time, and ensure nothing is lost. On any given day, a user might create a new notebook entry, paste in the experimental procedure, type or voice-record observations, upload photos or CSV files, and later compile results and conclusions in one section. ELNs also support cross-linking: one entry can link to previous related experiments, or to inventory entries listing specific samples and reagents used.</p>
+<p>Undergraduates and lab technicians likewise use ELNs to follow standard templates for their experiments. Instead of writing in paper binders, a student can use an ELN "page" to fill in observed values, snap a photo of a reading, or paste in an output graph. This encourages good lab practices from the start and makes it easy to later retrieve their data. In academic research, ELNs help disparate teams share methods and results, even across institutions. For instance, one group's ELN entry on a cell culture protocol can be copied and reused by another group, with full provenance and updates tracked. By centralizing all experiment details (from methods to raw data), ELNs improve collaboration and compliance: nothing is hidden in filed notes, and supervisors can audit progress in real time.</p>
+<h2 id="different-types-of-data-in-an-eln"><a class="header" href="#different-types-of-data-in-an-eln">Different Types of Data in an ELN</a></h2>
+<p>ELNs can store many kinds of research data in one place. Typical content includes:</p>
+<ul>
+<li>
+<p><strong>Textual notes and protocols:</strong> Experiment descriptions, procedures, and conclusions are written as rich text entries. Researchers may write protocols in the notebook or attach documents, then record step-by-step methods and observations.</p>
+</li>
+<li>
+<p><strong>Images and media:</strong> Photographs of experimental setups, microscope images, electrophoresis gels, or spectra are uploaded directly. Images can be annotated (e.g. marking features on a photo). ELNs even allow uploading photos taken on mobile devices during the experiment.</p>
+</li>
+<li>
+<p><strong>Data files and tables:</strong> Numerical data often come as spreadsheets, CSV files, or instrument outputs. These raw data files can be attached to the entry. For example, an ELN page might include an Excel file of measurements and a MATLAB graph, stored and even viewable inside the notebook. Because ELNs are digital, they can host large raw datasets without physical limits.</p>
+</li>
+<li>
+<p><strong>Metadata and links:</strong> Entries automatically include metadata like timestamps and authorship. Scientists can also tag entries or link to related pages (e.g. linking this week's experiment to a prior one). Many ELNs integrate with inventory/sample databases: entering a sample ID can record that sample in the notebook and link back to its database record.</p>
+</li>
+<li>
+<p><strong>Graphs and analysis results:</strong> Final results (charts, plots, statistical analyses) are saved as figures or PDFs attached to the entry. An ELN can also embed interactive elements (e.g. live links to analysis scripts or editable spreadsheets).</p>
+</li>
+</ul>
+<p>An example ELN page organized into sections: Methodology (green), Raw Data/Analysis (blue), and Results (red). This illustrates how an experiment record might be structured with text and attachments. ELNs let researchers upload spreadsheets or image files to each section (for calculations or figures) and tag entries by type or project.</p>
+<p><img src="images/eln-guide/eln-page-sections.png" alt="Example ELN page with Methodology, Raw Data/Analysis, and Results sections" /></p>
+<p><em>Figure: An example ELN page organized into sections (Methodology, Raw Data/Analysis, Results).</em></p>
+<p>ELNs support uploading images and time-stamped notes directly from the lab. For instance, one can take a photo of a gel or experimental apparatus and insert it into the "Observations" section. ELNs allow direct incorporation of instrument data and images into entries, and users can even use mobile apps to capture handwritten notes or photos during an experiment.</p>
+<p>Raw data (gels, spectra, spreadsheets) can be attached to ELN pages. In the example below, a gel image and an Excel calculation file are shown. ELNs make it easy to review and comment on raw data in context. Research shows that ELN entries often contain sections for uploading raw data or analysis files (images, Office files, etc.) which can then be annotated or processed within the ELN.</p>
+<p><img src="images/eln-guide/eln-raw-data.png" alt="Raw data attached to an ELN page: gel image and Excel file" /></p>
+<p><em>Figure: Raw data (e.g. gel image, spreadsheet) attached to an ELN page.</em></p>
+<p>Protocols and experimental design details are also stored in the notebook. The figure below shows a section of an ELN entry with the experiment's Background, Objective, and Protocol steps. Protocols are typically written as rich text or document attachments in an ELN. Some systems link this protocol to inventory lists of reagents and samples, ensuring every material used is tracked.</p>
+<p><img src="images/eln-guide/eln-protocol.png" alt="ELN entry with Background, Objective, and Protocol steps" /></p>
+<p><em>Figure: Protocols and experimental design in an ELN entry.</em></p>
+<p>Experimental design—hypotheses, variables, conditions, and how an experiment is structured—can also be captured in the notebook. The figure below shows how design elements are recorded alongside protocols, so that the rationale and plan for each experiment are preserved and searchable.</p>
+<p><img src="images/eln-guide/experiment-design.png" alt="Experiment design captured in an ELN entry" /></p>
+<p><em>Figure: Experiment design (objectives, variables, conditions) in an ELN.</em></p>
+<h2 id="ai--lab-notebooks-hackathon-ideas"><a class="header" href="#ai--lab-notebooks-hackathon-ideas">AI &amp; Lab Notebooks: Hackathon Ideas</a></h2>
+<p>The following ideas leverage the open, local architecture of the Pegasus ELN and can inspire ecosystem contributions and hackathon projects.</p>
+<h3 id="open-standards--fair-data"><a class="header" href="#open-standards--fair-data">Open Standards &amp; FAIR Data</a></h3>
+<p>Pegasus ELN uses open data formats and APIs. Hackathon teams can leverage these by building AI "skills" or parsers that read the JSON/CSV exports of notebook entries. Ensuring data follows FAIR principles (with metadata tags and persistent IDs) makes it easier for AI tools to interpret. Because the ELN is open-source, anyone can extend it or contribute plugins. For example, one project might write a module that scans the ELN JSON to extract a timeline of reagent usage, or validates entries against a standard template.</p>
+<h3 id="local-llm-integration"><a class="header" href="#local-llm-integration">Local LLM Integration</a></h3>
+<p>Use local large language model frameworks (like Ollama or LangChain) to connect an LLM with the notebook data. For instance, teams could use OpenClaw (formerly Moltbot), an open-source AI agent, to create a lab assistant that "reads" your ELN. OpenClaw runs locally and can execute tasks on your machine. A hackathon challenge could be: "Build an OpenClaw-style agent that answers questions like 'What was the protocol for Experiment 7?' or 'Plot the time series of pH readings' by querying the ELN." Because everything is local, data never leaves the machine. This is similar to ELNs already embedding AI chat assistants for scientists.</p>
+<h3 id="mlai-for-data-analysis"><a class="header" href="#mlai-for-data-analysis">ML/AI for Data Analysis</a></h3>
+<p>Apply machine learning to common life-science datasets in the ELN. Ideas include training a CNN to classify cell images attached in notebook entries, using NLP to automatically summarize an experiment's results from the notes, or applying anomaly detection on time-course data. Since ELNs structure data across experiments, teams can aggregate past entries to train models. For example, having structured experiment data lets teams "identify trends, anomalies, and performance metrics across projects over time." A concrete project could use existing ELN data to predict the outcome of a procedure or to flag inconsistent entries.</p>
+<h3 id="interactive-knowledge-graphs"><a class="header" href="#interactive-knowledge-graphs">Interactive Knowledge Graphs</a></h3>
+<p>Create a knowledge graph that links items in the notebook: nodes could represent experiments, samples, genes, chemicals, etc., and edges capture relationships (e.g. "sample X was used in experiment Y"). The graph could be visualized or queried interactively. In life sciences, such graphs are powerful: they've been used to prioritize disease-related genes, suggest drug repurposing opportunities, or find new drug-target interactions. For a hackathon, a team might build a graph that automatically ingests the ELN's metadata and creates an interactive explorer, helping scientists ask questions like "Which experiments used Compound A?" or "Which samples relate to a given cell line?"</p>
+<h3 id="ai-agents-for-lab-workflows"><a class="header" href="#ai-agents-for-lab-workflows">AI Agents for Lab Workflows</a></h3>
+<p>Inspired by the OpenClaw example, teams can design an AI workflow manager. For example, an agent could monitor the ELN API and trigger alerts or actions: if the agent reads a note about a long incubation, it might schedule a reminder; or if it detects missing data, it could prompt the user. By integrating with messaging apps, the agent could allow voice or chat interaction ("Hey AI, summarize yesterday's chromatography run"). Essentially, this is an extension of a chatbot assistant tailored to scientific workflows.</p>
+<h3 id="opendistributed-science"><a class="header" href="#opendistributed-science">Open/Distributed Science</a></h3>
+<p>Explore connecting ELN data to open science platforms. One idea is to integrate with Bio Protocol (BIO) – a blockchain-based DeSci platform where research can be shared and tokenized. A hackathon task could be to design a way to "publish" parts of a lab notebook onto a decentralized network (e.g. save a protocol with a persistent identifier). Teams could also consider the ethos of open-notebook science, where all data (even failed experiments) are made public in real time. For example, a project could sync select ELN entries to a public repository or wiki, enabling community feedback and distributed collaboration. This connects lab work with broader citizen science and open-data movements.</p>
+<p>Each of these ideas leverages the open, local architecture of the Pegasus ELN. Because the system's data format and API are open, contributors can freely build custom AI modules, chatbots, or graph tools that plug into the notebook. By drawing inspiration from OpenClaw/Moltbot agents, FAIR data principles, and decentralized science platforms, participants can create novel AI-powered features for life-science research. The goal is to spark creativity: for instance, one team might develop an LLM "protocol advisor," another might make an image-analysis plug-in, while another builds a knowledge-graph front-end for the lab. All of these would showcase how AI can enhance the functionality of an electronic lab notebook in a modern research setting.</p>
+<h2 id="references-and-further-reading"><a class="header" href="#references-and-further-reading">References and further reading</a></h2>
+<ul>
+<li><a href="https://www.labkey.com/what-is-an-electronic-lab-notebook/">What Is an Electronic Lab Notebook? | LabKey</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11189195/">Ten simple rules for implementing electronic lab notebooks (ELNs) - PMC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Electronic_lab_notebook">Electronic lab notebook - Wikipedia</a></li>
+<li><a href="https://help.labarchives.com/hc/en-us/articles/34329886396820-Example-Notebook-Page-Recording-an-Experiment">Example Notebook Page - Recording an Experiment – LabArchives</a></li>
+<li><a href="https://researchdata.wisc.edu/tools/the-big-picture-of-data-management-in-an-electronic-lab-notebook-eln/">The Big Picture of Data Management in an Electronic Lab Notebook (ELN) - Research Data Services</a></li>
+<li><a href="https://www.scientificamerican.com/article/moltbot-is-an-open-source-ai-agent-that-runs-your-computer/">OpenClaw is an open-source AI agent that runs your computer | Scientific American</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7327409/">Constructing knowledge graphs and their biomedical applications - PMC</a></li>
+<li><a href="https://help.wealthsimple.com/hc/en-ca/articles/41701045785883-Bio-Protocol-BIO">Bio Protocol (BIO) – Help Centre</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Open-notebook_science">Open-notebook science - Wikipedia</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-eln-open-standard"><a class="header" href="#the-eln-open-standard">The ELN Open Standard</a></h1>
+<p>This chapter describes the XML-based Electronic Lab Notebook (ELN) standard that underpins Pegasus and compatible tools. It provides structured scientific documentation, addressable data, protocol interoperability, and semantic extensibility while remaining machine-readable, AI-compatible, and tool-agnostic. A dedicated <a href="./chapter_5.html">Pegasus API</a> chapter (TBA) will document the local API and endpoints for reading and writing this data.</p>
+<hr />
+<h2 id="1-overview"><a class="header" href="#1-overview">1. Overview</a></h2>
+<p>This ELN XML standard is designed to provide:</p>
+<ul>
+<li>Structured scientific documentation</li>
+<li>Rich text + Markdown + LaTeX support</li>
+<li>Addressable tabular data</li>
+<li>Protocol embedding via LabOP</li>
+<li>Knowledge graph construction</li>
+<li>Deep linking &amp; cross-notebook references</li>
+<li>Embeddable web content</li>
+<li>Workflow triggers</li>
+<li>Audit and compliance support</li>
+</ul>
+<p>All resources are addressable using <strong>URI or URN identifiers</strong>.</p>
+<hr />
+<h2 id="2-root-structure"><a class="header" href="#2-root-structure">2. Root Structure</a></h2>
+<pre><code class="language-xml">&lt;notebook id="urn:lab:notebook:assay-2026-01"&gt;
+  &lt;metadata&gt;...&lt;/metadata&gt;
+  &lt;layout&gt;...&lt;/layout&gt;
+  &lt;content&gt;...&lt;/content&gt;
+  &lt;interfaces&gt;...&lt;/interfaces&gt;
+  &lt;knowledge&gt;...&lt;/knowledge&gt;
+&lt;/notebook&gt;
+</code></pre>
+<hr />
+<h2 id="3-metadata-section"><a class="header" href="#3-metadata-section">3. Metadata Section</a></h2>
+<p>Stores high-level notebook information.</p>
+<pre><code class="language-xml">&lt;metadata&gt;
+  &lt;title&gt;Antibiotic Susceptibility Assay&lt;/title&gt;
+  &lt;created&gt;2026-02-01T09:30:00Z&lt;/created&gt;
+  &lt;author&gt;Dr. A. Raman&lt;/author&gt;
+  &lt;tags&gt;microbiology,assay,phase1&lt;/tags&gt;
+&lt;/metadata&gt;
+</code></pre>
+<h3 id="supported-concepts"><a class="header" href="#supported-concepts">Supported Concepts</a></h3>
+<ul>
+<li>Versioning (optional extension)</li>
+<li>Access classification</li>
+<li>Audit metadata</li>
+</ul>
+<hr />
+<h2 id="4-layout-section"><a class="header" href="#4-layout-section">4. Layout Section</a></h2>
+<p>Separates layout concerns from content.</p>
+<pre><code class="language-xml">&lt;layout&gt;
+  &lt;position container="urn:lab:container:intro" x="0" y="0" width="12" height="4"/&gt;
+  &lt;position container="urn:lab:container:data" x="0" y="5" width="12" height="8"/&gt;
+&lt;/layout&gt;
+</code></pre>
+<p>This enables:</p>
+<ul>
+<li>Grid-based rendering</li>
+<li>PDF export formatting</li>
+<li>Dashboard-style layouts</li>
+</ul>
+<hr />
+<h2 id="5-content-section"><a class="header" href="#5-content-section">5. Content Section</a></h2>
+<p>The heart of the notebook.</p>
+<pre><code class="language-xml">&lt;content&gt;
+  &lt;container id="urn:lab:container:intro" type="text"&gt;
+    &lt;element format="markdown"&gt;&lt;![CDATA[
+# Objective
+
+Test bacterial resistance to **Ampicillin**.
+
+Formula used:
+
+$$
+OD_{corrected} = OD_{sample} - OD_{blank}
+$$
+    ]]&gt;&lt;/element&gt;
+  &lt;/container&gt;
+&lt;/content&gt;
+</code></pre>
+<h3 id="51-text-formats"><a class="header" href="#51-text-formats">5.1 Text Formats</a></h3>
+<p>Supported via:</p>
+<pre><code class="language-xml">&lt;element format="plain|markdown|latex|html|code"&gt;
+</code></pre>
+<p>Example (LaTeX):</p>
+<pre><code class="language-xml">&lt;element format="latex"&gt;
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+&lt;/element&gt;
+</code></pre>
+<hr />
+<h2 id="6-addressable-tables"><a class="header" href="#6-addressable-tables">6. Addressable Tables</a></h2>
+<p>Tables support row-level primary keys.</p>
+<pre><code class="language-xml">&lt;container id="urn:lab:container:results" type="table"&gt;
+  &lt;table id="urn:lab:table:assay-results" label="Assay Data"&gt;
+    &lt;header&gt;
+      &lt;cell&gt;Sample&lt;/cell&gt;
+      &lt;cell&gt;OD600&lt;/cell&gt;
+      &lt;cell&gt;Replicate&lt;/cell&gt;
+    &lt;/header&gt;
+    &lt;row id="urn:lab:row:sample-001"&gt;
+      &lt;cell&gt;Sample-001&lt;/cell&gt;
+      &lt;cell&gt;0.87&lt;/cell&gt;
+      &lt;cell&gt;1&lt;/cell&gt;
+    &lt;/row&gt;
+    &lt;row id="urn:lab:row:sample-002"&gt;
+      &lt;cell&gt;Sample-002&lt;/cell&gt;
+      &lt;cell&gt;0.91&lt;/cell&gt;
+      &lt;cell&gt;1&lt;/cell&gt;
+    &lt;/row&gt;
+  &lt;/table&gt;
+&lt;/container&gt;
+</code></pre>
+<h3 id="linking-to-a-specific-row"><a class="header" href="#linking-to-a-specific-row">Linking to a Specific Row</a></h3>
+<pre><code class="language-xml">&lt;link
+  type="internal"
+  target="urn:lab:table:assay-results"
+  fragment="urn:lab:row:sample-001"
+  label="Sample 001 Data"/&gt;
+</code></pre>
+<hr />
+<h2 id="7-embeddable-content"><a class="header" href="#7-embeddable-content">7. Embeddable Content</a></h2>
+<p>Supports iframe-like rendering.</p>
+<pre><code class="language-xml">&lt;embed
+  type="iframe"
+  src="https://plotly.com/~lab/123"
+  width="800"
+  height="600"
+  sandbox="allow-scripts allow-same-origin"
+  allowfullscreen="true"/&gt;
+</code></pre>
+<p>Use cases:</p>
+<ul>
+<li>Interactive plots</li>
+<li>Remote dashboards</li>
+<li>Computational notebooks</li>
+</ul>
+<hr />
+<h2 id="8-protocol-support-labop"><a class="header" href="#8-protocol-support-labop">8. Protocol Support (LabOP)</a></h2>
+<p>Protocols are embedded verbatim.</p>
+<pre><code class="language-xml">&lt;protocol id="urn:lab:protocol:ampicillin-test" title="Ampicillin MIC" version="1.0"&gt;
+  &lt;labop format="json-ld" schema="https://labop.org/schema"&gt;
+    {
+      "@type": "Protocol",
+      "name": "Ampicillin MIC Test",
+      "steps": [
+        { "description": "Prepare bacterial culture" },
+        { "description": "Add antibiotic gradient" }
+      ]
+    }
+  &lt;/labop&gt;
+&lt;/protocol&gt;
+</code></pre>
+<hr />
+<h2 id="9-measurements--instrument-data"><a class="header" href="#9-measurements--instrument-data">9. Measurements &amp; Instrument Data</a></h2>
+<pre><code class="language-xml">&lt;measurement
+  id="urn:lab:measurement:od600-001"
+  parameterRef="urn:lab:param:od600"
+  value="0.87"
+  unit="OD"/&gt;
+
+&lt;spectrum
+  id="urn:lab:spectrum:uvvis-001"
+  type="UV-Vis"
+  dataRef="urn:lab:file:uvvis-data.csv"/&gt;
+</code></pre>
+<hr />
+<h2 id="10-action-triggers"><a class="header" href="#10-action-triggers">10. Action Triggers</a></h2>
+<p>Used to launch external scripts or automation.</p>
+<pre><code class="language-xml">&lt;action
+  id="urn:lab:action:export"
+  label="Export Results"
+  trigger="manual"
+  method="POST"
+  uri="https://lab-system/export"
+  format="application/json"/&gt;
+</code></pre>
+<p>Permissions are managed externally by the calling tool.</p>
+<hr />
+<h2 id="11-interfaces-section"><a class="header" href="#11-interfaces-section">11. Interfaces Section</a></h2>
+<p>For cross-document linking.</p>
+<pre><code class="language-xml">&lt;interfaces&gt;
+  &lt;link
+    type="external"
+    target="urn:lab:notebook:previous-study"
+    label="Previous Study"/&gt;
+&lt;/interfaces&gt;
+</code></pre>
+<p>Supports:</p>
+<ul>
+<li>Cross-notebook linking</li>
+<li>LIMS references</li>
+<li>DOI references</li>
+</ul>
+<hr />
+<h2 id="12-knowledge-graph"><a class="header" href="#12-knowledge-graph">12. Knowledge Graph</a></h2>
+<p>Enables structured scientific reasoning.</p>
+<pre><code class="language-xml">&lt;knowledge&gt;
+  &lt;triple
+    subject="urn:lab:row:sample-001"
+    predicate="urn:ontology:hasResistance"
+    object="urn:lab:compound:ampicillin"/&gt;
+&lt;/knowledge&gt;
+</code></pre>
+<p>Enables:</p>
+<ul>
+<li>Semantic queries</li>
+<li>Automated reasoning</li>
+<li>AI-assisted analysis</li>
+</ul>
+<hr />
+<h2 id="13-audit--compliance"><a class="header" href="#13-audit--compliance">13. Audit &amp; Compliance</a></h2>
+<pre><code class="language-xml">&lt;auditTrail
+  id="urn:lab:audit:entry-1"
+  user="dr.raman"
+  action="edit"
+  timestamp="2026-02-01T10:00:00Z"/&gt;
+
+&lt;signature
+  id="urn:lab:signature:approval"
+  signerRef="urn:user:dr.raman"
+  role="PI"
+  reason="Final Approval"/&gt;
+</code></pre>
+<p>Supports:</p>
+<ul>
+<li>21 CFR Part 11 compliance</li>
+<li>Traceability</li>
+<li>Regulatory review</li>
+</ul>
+<hr />
+<h2 id="14-uriurn-design-rules"><a class="header" href="#14-uriurn-design-rules">14. URI/URN Design Rules</a></h2>
+<p>Recommended pattern:</p>
+<pre><code class="language-text">urn:lab:{type}:{identifier}
+</code></pre>
+<p>Examples:</p>
+<pre><code class="language-text">urn:lab:notebook:assay-2026-01
+urn:lab:container:results
+urn:lab:table:assay-results
+urn:lab:row:sample-001
+urn:lab:measurement:od600-001
+</code></pre>
+<p>Benefits:</p>
+<ul>
+<li>Globally unique</li>
+<li>Deep-linkable</li>
+<li>Semantic-friendly</li>
+</ul>
+<hr />
+<h2 id="15-design-philosophy"><a class="header" href="#15-design-philosophy">15. Design Philosophy</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Principle</th><th>Implementation</th></tr></thead><tbody>
+<tr><td>Separation of layout &amp; content</td><td><code>&lt;layout&gt;</code> vs <code>&lt;content&gt;</code></td></tr>
+<tr><td>Semantic addressability</td><td>URI/URN-based IDs</td></tr>
+<tr><td>Extensibility</td><td>Choice-based schema</td></tr>
+<tr><td>AI readiness</td><td>RDF-style triples</td></tr>
+<tr><td>Protocol standardization</td><td>LabOP embedding</td></tr>
+<tr><td>Web-native</td><td>iframe embedding</td></tr>
+<tr><td>Tool-agnostic security</td><td>Auth externalized</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="16-complete-minimal-example"><a class="header" href="#16-complete-minimal-example">16. Complete Minimal Example</a></h2>
+<pre><code class="language-xml">&lt;notebook id="urn:lab:notebook:demo"&gt;
+  &lt;metadata&gt;
+    &lt;title&gt;Demo Notebook&lt;/title&gt;
+    &lt;created&gt;2026-02-19T12:00:00Z&lt;/created&gt;
+    &lt;author&gt;Dr. X&lt;/author&gt;
+  &lt;/metadata&gt;
+
+  &lt;layout&gt;
+    &lt;position container="urn:lab:container:main" x="0" y="0" width="12" height="6"/&gt;
+  &lt;/layout&gt;
+
+  &lt;content&gt;
+    &lt;container id="urn:lab:container:main"&gt;
+      &lt;element format="markdown"&gt;
+        &lt;![CDATA[
+## Demo Entry
+This notebook supports Markdown and LaTeX:
+
+$$E = mc^2$$
+        ]]&gt;
+      &lt;/element&gt;
+    &lt;/container&gt;
+  &lt;/content&gt;
+
+  &lt;interfaces/&gt;
+  &lt;knowledge/&gt;
+&lt;/notebook&gt;
+</code></pre>
+<hr />
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>This ELN XML standard provides:</p>
+<ul>
+<li>Structured scientific documentation</li>
+<li>Addressable data primitives</li>
+<li>Protocol interoperability</li>
+<li>Semantic extensibility</li>
+<li>Automation hooks</li>
+<li>Web-native rendering</li>
+<li>Regulatory readiness</li>
+</ul>
+<p>It is designed to be:</p>
+<ul>
+<li>Machine-readable</li>
+<li>AI-compatible</li>
+<li>Long-term archival safe</li>
+<li>Tool-agnostic</li>
+</ul>
+<p>Possible next steps for the ecosystem include a JSON representation of the standard, a validation checklist for implementers, a compliance mapping (e.g., FDA / ISO), and a versioned governance model for evolving the standard.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="elns-at-work"><a class="header" href="#elns-at-work">ELNs at Work</a></h1>
+<p>Electronic Lab Notebooks are <strong>not just digital Word documents</strong>. They function as <strong>operational systems for scientific workflows</strong>, bridging experimental planning, execution, data capture, and collaboration.</p>
+<p>Below are the <strong>core operational areas where ELNs are used in real laboratories</strong>.</p>
+<h2 id="experimental-planning-and-protocol-management"><a class="header" href="#experimental-planning-and-protocol-management">Experimental Planning and Protocol Management</a></h2>
+<h3 id="what-scientists-do"><a class="header" href="#what-scientists-do">What scientists do</a></h3>
+<ul>
+<li>Write step-by-step experimental protocols (e.g., PCR, microscopy imaging, cell culture).</li>
+<li>Create templates for common procedures (SOPs).</li>
+<li>Version-control protocols when methods change.</li>
+</ul>
+<h3 id="why-elns-matter"><a class="header" href="#why-elns-matter">Why ELNs matter</a></h3>
+<ul>
+<li>Ensures <strong>reproducibility</strong>: everyone in the lab follows the same procedure.</li>
+<li>Allows teams to compare how protocol changes affect results.</li>
+<li>Central repository prevents "tribal knowledge" loss when students leave.</li>
+</ul>
+<h3 id="typical-eln-content"><a class="header" href="#typical-eln-content">Typical ELN content</a></h3>
+<ul>
+<li>Structured protocol steps</li>
+<li>Materials lists</li>
+<li>Timing parameters</li>
+<li>Safety notes</li>
+<li>Attachments (PDFs, images, instrument settings)</li>
+</ul>
+<h2 id="recording-experimental-observations-and-results"><a class="header" href="#recording-experimental-observations-and-results">Recording Experimental Observations and Results</a></h2>
+<h3 id="what-scientists-do-1"><a class="header" href="#what-scientists-do-1">What scientists do</a></h3>
+<ul>
+<li>Log daily experimental notes ("lab journal entries").</li>
+<li>Capture raw observations: unexpected results, contamination, anomalies.</li>
+<li>Attach data files and images from instruments.</li>
+</ul>
+<h3 id="why-elns-matter-1"><a class="header" href="#why-elns-matter-1">Why ELNs matter</a></h3>
+<ul>
+<li>Prevents transcription errors and lost notebooks.</li>
+<li>Enables search across years of experiments.</li>
+<li>Creates structured provenance of scientific work.</li>
+</ul>
+<h3 id="typical-eln-content-1"><a class="header" href="#typical-eln-content-1">Typical ELN content</a></h3>
+<ul>
+<li>Free-text notes</li>
+<li>Structured measurements</li>
+<li>Instrument outputs (CSV, microscopy images, spectra)</li>
+<li>Metadata (temperature, reagent batch, timestamps)</li>
+</ul>
+<h2 id="data-management-and-result-curation"><a class="header" href="#data-management-and-result-curation">Data Management and Result Curation</a></h2>
+<h3 id="what-scientists-do-2"><a class="header" href="#what-scientists-do-2">What scientists do</a></h3>
+<ul>
+<li>Tag key findings.</li>
+<li>Compare experiments across time.</li>
+<li>Track experiment lineage ("this result came from this sample using this protocol").</li>
+</ul>
+<h3 id="why-elns-matter-2"><a class="header" href="#why-elns-matter-2">Why ELNs matter</a></h3>
+<ul>
+<li>Enables trend discovery across experiments.</li>
+<li>Facilitates project retrospectives and scientific reporting.</li>
+<li>Helps supervisors review student progress.</li>
+</ul>
+<h3 id="typical-eln-content-2"><a class="header" href="#typical-eln-content-2">Typical ELN content</a></h3>
+<ul>
+<li>Experiment graphs and summary tables</li>
+<li>Tags (e.g., "failed", "optimized", "publishable")</li>
+<li>Links between experiments and datasets</li>
+</ul>
+<h2 id="sample-and-inventory-tracking"><a class="header" href="#sample-and-inventory-tracking">Sample and Inventory Tracking</a></h2>
+<h3 id="what-scientists-do-3"><a class="header" href="#what-scientists-do-3">What scientists do</a></h3>
+<ul>
+<li>Track biological samples, chemicals, reagents, antibodies, DNA plasmids, cell lines.</li>
+<li>Monitor storage locations (freezers, racks, plates).</li>
+<li>Track batch numbers and expiry dates.</li>
+</ul>
+<h3 id="why-elns-matter-3"><a class="header" href="#why-elns-matter-3">Why ELNs matter</a></h3>
+<ul>
+<li>Prevents wasted reagents and mislabeled samples.</li>
+<li>Ensures traceability for regulatory and reproducibility requirements.</li>
+<li>Links experimental results to specific reagent lots.</li>
+</ul>
+<h3 id="typical-eln-content-3"><a class="header" href="#typical-eln-content-3">Typical ELN content</a></h3>
+<ul>
+<li>Sample IDs and lineage</li>
+<li>Storage location metadata</li>
+<li>Barcode IDs</li>
+<li>Quantity usage logs</li>
+</ul>
+<h2 id="instrument-and-automation-integration"><a class="header" href="#instrument-and-automation-integration">Instrument and Automation Integration</a></h2>
+<h3 id="what-scientists-do-4"><a class="header" href="#what-scientists-do-4">What scientists do</a></h3>
+<ul>
+<li>Connect ELNs to instruments (sequencers, microscopes, spectrometers).</li>
+<li>Automatically ingest machine outputs.</li>
+<li>Log machine settings.</li>
+</ul>
+<h3 id="why-elns-matter-4"><a class="header" href="#why-elns-matter-4">Why ELNs matter</a></h3>
+<ul>
+<li>Eliminates manual copying of results.</li>
+<li>Ensures provenance of computational pipelines.</li>
+<li>Enables automation and robotics workflows.</li>
+</ul>
+<h3 id="typical-eln-content-4"><a class="header" href="#typical-eln-content-4">Typical ELN content</a></h3>
+<ul>
+<li>Raw instrument output files</li>
+<li>Instrument configuration metadata</li>
+<li>Run logs</li>
+</ul>
+<h2 id="collaboration-and-team-coordination"><a class="header" href="#collaboration-and-team-coordination">Collaboration and Team Coordination</a></h2>
+<h3 id="what-scientists-do-5"><a class="header" href="#what-scientists-do-5">What scientists do</a></h3>
+<ul>
+<li>Share experiment records with collaborators.</li>
+<li>Comment and review experiments.</li>
+<li>Assign tasks and track progress.</li>
+</ul>
+<h3 id="why-elns-matter-5"><a class="header" href="#why-elns-matter-5">Why ELNs matter</a></h3>
+<ul>
+<li>Supports distributed teams and remote collaboration.</li>
+<li>Supervisors can review student lab work in real time.</li>
+<li>Reduces version conflicts and email chaos.</li>
+</ul>
+<h3 id="typical-eln-content-5"><a class="header" href="#typical-eln-content-5">Typical ELN content</a></h3>
+<ul>
+<li>User comments and annotations</li>
+<li>Task assignments</li>
+<li>Project dashboards</li>
+</ul>
+<h2 id="regulatory-compliance-and-audit-trails-industry--clinical-labs"><a class="header" href="#regulatory-compliance-and-audit-trails-industry--clinical-labs">Regulatory Compliance and Audit Trails (Industry &amp; Clinical Labs)</a></h2>
+<h3 id="what-scientists-do-6"><a class="header" href="#what-scientists-do-6">What scientists do</a></h3>
+<ul>
+<li>Sign off on experiments.</li>
+<li>Maintain immutable audit logs.</li>
+<li>Export documentation for regulators.</li>
+</ul>
+<h3 id="why-elns-matter-6"><a class="header" href="#why-elns-matter-6">Why ELNs matter</a></h3>
+<ul>
+<li>Required for pharma, clinical, and manufacturing research (GLP, GMP, ISO).</li>
+<li>Ensures data integrity and legal traceability.</li>
+<li>Prevents fraud or data tampering.</li>
+</ul>
+<h3 id="typical-eln-content-6"><a class="header" href="#typical-eln-content-6">Typical ELN content</a></h3>
+<ul>
+<li>Electronic signatures</li>
+<li>Time-stamped logs</li>
+<li>Access control metadata</li>
+</ul>
+<h2 id="knowledge-management-and-institutional-memory"><a class="header" href="#knowledge-management-and-institutional-memory">Knowledge Management and Institutional Memory</a></h2>
+<h3 id="what-scientists-do-7"><a class="header" href="#what-scientists-do-7">What scientists do</a></h3>
+<ul>
+<li>Store historical experiments and institutional protocols.</li>
+<li>Search across years of research.</li>
+<li>Train new lab members using past notebooks.</li>
+</ul>
+<h3 id="why-elns-matter-7"><a class="header" href="#why-elns-matter-7">Why ELNs matter</a></h3>
+<ul>
+<li>Prevents knowledge loss when researchers graduate.</li>
+<li>Enables longitudinal research analysis.</li>
+<li>Creates searchable scientific memory for an institution.</li>
+</ul>
+<h3 id="typical-eln-content-7"><a class="header" href="#typical-eln-content-7">Typical ELN content</a></h3>
+<ul>
+<li>Long-term project archives</li>
+<li>Training protocols</li>
+<li>Historical datasets</li>
+</ul>
+<h2 id="integration-with-broader-research-systems-lims-data-lakes-publications"><a class="header" href="#integration-with-broader-research-systems-lims-data-lakes-publications">Integration with Broader Research Systems (LIMS, Data Lakes, Publications)</a></h2>
+<h3 id="what-scientists-do-8"><a class="header" href="#what-scientists-do-8">What scientists do</a></h3>
+<ul>
+<li>Sync ELNs with:
+<ul>
+<li>LIMS (Laboratory Information Management Systems)</li>
+<li>Data repositories</li>
+<li>Publication pipelines</li>
+</ul>
+</li>
+<li>Export data for papers and patents.</li>
+</ul>
+<h3 id="why-elns-matter-8"><a class="header" href="#why-elns-matter-8">Why ELNs matter</a></h3>
+<ul>
+<li>Supports FAIR data principles (Findable, Accessible, Interoperable, Reusable).</li>
+<li>Bridges wet-lab work with computational pipelines.</li>
+</ul>
+<h3 id="typical-eln-content-8"><a class="header" href="#typical-eln-content-8">Typical ELN content</a></h3>
+<ul>
+<li>Metadata exports</li>
+<li>API connections</li>
+<li>Dataset packages</li>
+</ul>
+<h2 id="project-management-for-research-programs"><a class="header" href="#project-management-for-research-programs">Project Management for Research Programs</a></h2>
+<h3 id="what-scientists-do-9"><a class="header" href="#what-scientists-do-9">What scientists do</a></h3>
+<ul>
+<li>Track milestones in multi-month experiments.</li>
+<li>Manage multi-experiment research programs.</li>
+<li>Coordinate interdisciplinary projects (biology + chemistry + ML).</li>
+</ul>
+<h3 id="why-elns-matter-9"><a class="header" href="#why-elns-matter-9">Why ELNs matter</a></h3>
+<ul>
+<li>Makes research programs observable like software projects.</li>
+<li>Helps principal investigators manage multiple students and experiments.</li>
+</ul>
+<h3 id="typical-eln-content-9"><a class="header" href="#typical-eln-content-9">Typical ELN content</a></h3>
+<ul>
+<li>Project timelines</li>
+<li>Experiment hierarchies</li>
+<li>Milestone markers</li>
+</ul>
+<h2 id="key-insight-for-hackathon-participants"><a class="header" href="#key-insight-for-hackathon-participants">Key Insight for Hackathon Participants</a></h2>
+<p><strong>An ELN is not just a notebook. It is:</strong></p>
+<ul>
+<li>A scientific data lake</li>
+<li>A provenance system</li>
+<li>A workflow engine</li>
+<li>A collaboration platform</li>
+<li>A regulatory artifact</li>
+<li>A knowledge graph substrate</li>
+</ul>
+<p>This makes it <strong>an extremely rich target for AI plugins</strong>.</p>
+<h2 id="hackathon-relevant-ai-opportunities-from-these-usage-areas"><a class="header" href="#hackathon-relevant-ai-opportunities-from-these-usage-areas">Hackathon-Relevant AI Opportunities from These Usage Areas</a></h2>
+<h3 id="ai-for-experimental-understanding"><a class="header" href="#ai-for-experimental-understanding">AI for Experimental Understanding</a></h3>
+<ul>
+<li>Summarize daily lab logs into weekly reports.</li>
+<li>Detect anomalies in experiment logs.</li>
+</ul>
+<h3 id="ai-for-protocol-intelligence"><a class="header" href="#ai-for-protocol-intelligence">AI for Protocol Intelligence</a></h3>
+<ul>
+<li>Auto-generate protocol drafts from natural language goals.</li>
+<li>Compare protocol versions and predict outcomes.</li>
+</ul>
+<h3 id="ai-for-sample-intelligence"><a class="header" href="#ai-for-sample-intelligence">AI for Sample Intelligence</a></h3>
+<ul>
+<li>Detect missing metadata.</li>
+<li>Recommend reagent substitutions.</li>
+</ul>
+<h3 id="ai-for-instrument-data"><a class="header" href="#ai-for-instrument-data">AI for Instrument Data</a></h3>
+<ul>
+<li>Auto-annotate raw machine data with experiment context.</li>
+<li>Build semantic indexing of datasets.</li>
+</ul>
+<h3 id="ai-for-collaboration"><a class="header" href="#ai-for-collaboration">AI for Collaboration</a></h3>
+<ul>
+<li>Conversational assistants that answer: <em>"What did we try last month on this cell line?"</em></li>
+</ul>
+<h3 id="ai-for-compliance"><a class="header" href="#ai-for-compliance">AI for Compliance</a></h3>
+<ul>
+<li>Flag missing signatures or documentation gaps.</li>
+</ul>
+<h3 id="ai-for-knowledge-graphs"><a class="header" href="#ai-for-knowledge-graphs">AI for Knowledge Graphs</a></h3>
+<ul>
+<li>Build experiment-sample-protocol-result graphs.</li>
+<li>Enable graph queries and visualization.</li>
+</ul>
+<h2 id="positioning-for-pegasus"><a class="header" href="#positioning-for-pegasus">Positioning for Pegasus</a></h2>
+<blockquote>
+<p>Pegasus is a local-first, open-standard ELN platform that exposes this scientific operational data via a local API. This buildathon invites participants to explore how AI systems can interact with structured scientific workflows, build intelligent assistants, and create new interfaces for distributed scientific knowledge.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hackathon-guide"><a class="header" href="#hackathon-guide">Hackathon Guide</a></h1>
+<p>Electronic Lab Notebooks (ELNs) are software tools that replicate the traditional paper notebooks scientists use to record experiments. An ELN lets a researcher enter protocols (step-by-step methods), observations, notes, and data on a computer or tablet. These digital lab notebooks make experiment records easy to search, share, and back up. ELNs allow scientists to access, search, and share results from an experiment, offering advantages like data security, auditing, and collaboration over analog notebooks. In practice, ELNs often include time stamps and access controls, so each entry is tracked and legally traceable, just like a paper lab notebook.</p>
+<h2 id="how-elns-are-used-in-life-sciences-1"><a class="header" href="#how-elns-are-used-in-life-sciences-1">How ELNs are used in life sciences</a></h2>
+<p>In biology, chemistry and biomedical labs, ELNs are used every day to plan, run, and document experiments. A typical workflow might look like:</p>
+<ul>
+<li><strong>Planning an experiment:</strong> The scientist writes the objective and detailed procedure (the "protocol") in the ELN. This can include listing reagents, equipment, and expected outcomes.</li>
+<li><strong>Recording results:</strong> As the experiment proceeds, the researcher enters observations (e.g. color changes, measurements) and data (tables of values, spectra, etc.) into the notebook. They can also attach images (microscope pictures, gel photos) or instrument output files directly to the entry.</li>
+<li><strong>Inventory and resources:</strong> ELNs often link to inventories of samples and reagents. Lab members note which chemicals or biological samples they used, helping track inventory and avoid waste. Some systems even record equipment calibrations or maintenance.</li>
+<li><strong>Analysis and conclusions:</strong> After finishing the experiment, scientists can use the ELN to analyze data (plotting graphs, computing results) and write conclusions. For instance, one lab's Notion-based ELN has a section for conclusions and even offers an AI-assisted draft to overcome writer's block.</li>
+<li><strong>Collaboration and review:</strong> ELNs make it easy to share work with teammates. Colleagues can be assigned to review an experiment entry (e.g. a status field "In Review" prompts a peer check). Because entries are digital, others can search previous experiments or comment asynchronously, greatly improving communication. ELNs support the FAIR principles (making data Findable, Accessible, Interoperable, Reusable) and allow oversight by PIs, which paper notebooks cannot.</li>
+</ul>
+<p>In summary, an ELN in a life-science lab becomes the central record of everything: from experimental goals and protocols, through raw data and images, to final results and interpretations. Modern ELNs may also integrate with lab instruments, automatically importing measurements instead of printing them out by hand.</p>
+<h2 id="data-types-in-a-lab-notebook"><a class="header" href="#data-types-in-a-lab-notebook">Data types in a lab notebook</a></h2>
+<p>A lab notebook entry can contain many kinds of data, often more than on paper. Common data types include:</p>
+<ul>
+<li><strong>Structured data:</strong> Numeric or tabular data already in a standard format (e.g. a spreadsheet of absorbance readings, a CSV file of instrument results). Structured data is easy to parse automatically.</li>
+<li><strong>Unstructured data:</strong> Free-form content that needs processing. Examples: photographs (e.g. of cell cultures or gels), microscopy images, handwritten notes (if scanned), graphs, maps, and sequence data. A lab notebook might include raw photos of a gel or an X-ray crystallography image. These require digitization or AI tools to interpret. Any handwritten observations or printed reports fall under unstructured data as well.</li>
+<li><strong>Semi-structured data:</strong> A mix of both. For instance, a scanned instrument printout with metadata (time, sample ID) is semi-structured – the numbers are structured but still need context. Similarly, a table of PCR cycle data with attached notes is semi-structured: it's tabular data plus descriptive tags. Semi-structured data has some metadata (e.g. experiment date, sample name) that can help make sense of it.</li>
+<li><strong>Attachments and multimedia:</strong> ELNs can store any file type. Common attachments include charts and plots (graphs of experimental results), raw data files (CSV, Excel, or proprietary instrument files), PDFs of articles or reports, and chemical diagrams (drawings of molecular structures). For biological labs, this could also include DNA sequence files or images from sequence alignments.</li>
+<li><strong>Protocol and method text:</strong> The detailed written protocol itself (often copied from published sources or standardized methods) lives in text form. This may be entered as structured fields (e.g. steps in a checklist) or free-form text, and it can be linked to resources like reagent data sheets or literature references.</li>
+</ul>
+<p>In essence, the ELN captures everything about an experiment: the narrative text, the quantitative measurements, and any supporting media. Modern data management views this as the "central repository of facts, statistics, results, and other project information," integrating experimental methods, raw data, and metadata.</p>
+<h2 id="ideas-for-ai-extensions-and-projects"><a class="header" href="#ideas-for-ai-extensions-and-projects">Ideas for AI extensions and projects</a></h2>
+<p>Since Pegasus uses open standards and provides a local API, it's ideal for building AI plugins. Here are some seed ideas and inspiration.</p>
+<h3 id="open-data--interoperability"><a class="header" href="#open-data--interoperability">Open Data &amp; Interoperability</a></h3>
+<p>Ensure that experimental data is exported in open, machine-readable formats (e.g. CSV, JSON, RO-Crate packages). Relying on proprietary formats risks vendor lock-in. Pegasus's open-standard approach means all notebook data (text, tables, images, metadata) can be parsed by any tool. Hackathon modules should leverage this – for example, define a clear JSON schema for experiment entries or use community standards (like the ELN Consortium file format). This makes it easy for an AI to read any experiment's data or to write back a report or summary.</p>
+<h3 id="local-ai-integration-ollama-local-llms"><a class="header" href="#local-ai-integration-ollama-local-llms">Local AI Integration (Ollama, Local LLMs)</a></h3>
+<p>Pegasus runs on the local desktop, just like tools such as Ollama allow running LLMs on-premise. Ollama exposes a chat API endpoint on the local machine. A hackathon project could connect Pegasus to a local LLM via Ollama: for instance, call <code>/api/chat</code> with lab data as context. This means the AI skill runs offline, keeping all lab data secure. For example, an AI skill might fetch an experiment's contents from Pegasus's API, send it to the local model for analysis or question-answering, and then return a written summary or insight – all without ever hitting the internet.</p>
+<h3 id="ai-use-cases-in-life-sciences"><a class="header" href="#ai-use-cases-in-life-sciences">AI use cases in life sciences</a></h3>
+<p>There are many promising applications of ML/AI in lab research that can integrate Pegasus data:</p>
+<ul>
+<li><strong>Experiment Summarization:</strong> Use an LLM to read the weekly log of an experiment and generate a concise conclusion or abstract for it.</li>
+<li><strong>Semantic Search and Retrieval:</strong> Create an embedding-based search engine so scientists can query: "Show me experiments involving protein X with positive results." The AI can interpret the query, embed it, and find relevant notebook pages.</li>
+<li><strong>Protocol Recommendation:</strong> Given the metadata and partial results of an experiment, an AI could suggest next steps or alternative protocols (pulling from open resources like Bio-protocol).</li>
+<li><strong>Data Analysis Automation:</strong> Use ML models to automatically analyze attached data. For instance, identify bands on a gel image, count cells in a microscopy photo, or normalize and graph numeric results.</li>
+<li><strong>Anomaly Detection:</strong> Machine learning could flag unusual results (outliers) or missing steps in an experiment, prompting the user to double-check their procedure or data.</li>
+<li><strong>Hypothesis Testing:</strong> Given past results stored in Pegasus, an AI could suggest hypotheses or design new experiments (a form of "lab notebook-powered intelligence").</li>
+</ul>
+<p>Research in AI for science often combines retrieval-augmented generation (RAG) and knowledge graphs. Pairing an LLM with domain-specific knowledge graphs and curated data improves accuracy and traceability. A Pegasus plugin could, for instance, build a custom knowledge graph of the lab's experiments (linking reagents, methods, outcomes) and let an LLM query it to answer user questions more reliably.</p>
+<h3 id="interactive-knowledge-graphs-1"><a class="header" href="#interactive-knowledge-graphs-1">Interactive Knowledge Graphs</a></h3>
+<p>Build a graph database where nodes are experiments, protocols, samples, reagents, and results, and edges capture "used", "contains", or "derived from" relationships. An AI-driven interface could let users ask complex questions: e.g. "Which experiments used enzyme Y and what were their yields?" or "Show me the chain of methods and samples that led to this final result." Knowledge graphs make rich use of ELN data's structured relationships. By integrating Pegasus's data into a KG, we enable visual exploration of lab work and empower AI queries that trace reasoning steps.</p>
+<h3 id="agentic-ai-openclawmoltbot-inspiration"><a class="header" href="#agentic-ai-openclawmoltbot-inspiration">Agentic AI (OpenClaw/Moltbot inspiration)</a></h3>
+<p>Imagine an AI assistant for the lab, inspired by projects like OpenClaw/Moltbot. OpenClaw (formerly Moltbot) is an open-source AI agent that runs on your own computer, with the ability to install software and manipulate files by itself. It "gives [the AI model] so-called hands…so it can run commands and manipulate files". In a lab context, one could build an "auto lab assistant" that watches Pegasus's events. For example, a scientist could tell it (by chat or voice): "Take the latest sequencing results, run the analysis pipeline, and update the notebook with a summary." The agent would then break this goal into steps, run the pipeline software, and write the output back into Pegasus. A hackathon task might be to create a simple local agent that uses Pegasus's API: e.g., an AI that, when a new data file appears, automatically generates a report entry or reminds the user about an incomplete protocol.</p>
+<h3 id="open-protocols--distributed-science"><a class="header" href="#open-protocols--distributed-science">Open Protocols &amp; Distributed Science</a></h3>
+<p>Leverage open sharing of experimental protocols to link Pegasus with distributed science. Bio-protocol is an open-access repository of peer-reviewed life science protocols, and platforms like protocols.io allow researchers to share and discuss detailed methods. A Pegasus plugin could, for example, query these services: given a protocol name or key step, retrieve matching published protocols, or check whether a lab's procedure follows a known standard. Conversely, users could export their own experimental protocol from Pegasus and contribute it to an open database, helping the global "distributed science" community. This fosters reproducibility: anyone could see exactly how an experiment was done, compare methods, or even crowdsource improvements.</p>
+<p>Inspiration for this hackathon includes open-source AI projects like OpenClaw/Moltbot (local AI agents that "run your computer") and collaborative science platforms like Bio-protocol. Participants should feel free to mix and match ideas: for instance, build a knowledge-graph explorer that uses an LLM backend (via Ollama) and displays results in the Pegasus UI, or a voice-activated lab assistant that reads your notebook and responds. The key is to harness Pegasus's open data – structured experiment records, metadata, and attachments – to create AI tools that make lab work easier, more insightful, and more collaborative.</p>
+<h2 id="evaluation-at-a-glance"><a class="header" href="#evaluation-at-a-glance">Evaluation at a glance</a></h2>
+<p>Buildathon projects are scored 1–5 on five criteria (weighted total, max 5.0). Judges prioritize <strong>substance over polish</strong> and require <strong>evidence</strong> (demo/code).</p>
+<div class="table-wrapper"><table><thead><tr><th>Criterion</th><th>Weight</th><th>What counts</th></tr></thead><tbody>
+<tr><td>Scientific utility</td><td>30%</td><td>Solves real researcher problems (reproducibility, provenance, workflow gaps); clear impact.</td></tr>
+<tr><td>Local-first design</td><td>25%</td><td>Works offline; data stays on machine; local models (e.g. Ollama); no cloud dependency for core function.</td></tr>
+<tr><td>Open standards compliance</td><td>20%</td><td>Correct use of Pegasus data formats and API; see <a href="./chapter_2.html">Chapter 2</a> and <a href="./chapter_5.html">Pegasus API</a> (TBA).</td></tr>
+<tr><td>Extensibility</td><td>15%</td><td>Others can extend or build on the project; clear structure, docs, extension points.</td></tr>
+<tr><td>Creativity</td><td>10%</td><td>Novel combination of AI/ML with notebook data; strong domain adaptation.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Thresholds:</strong> 4.2+ winning; 3.8–4.1 strong finalist; &lt;3.0 participation. A short summary of what judges look for is also in <a href="./chapter_0.html#what-buildathon-judges-care-about">Start Here</a>.</p>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>An ELN is a digital lab notebook that captures all aspects of scientific experiments. In life sciences, ELNs are used daily to plan experiments, record detailed data (numbers, images, notes), manage samples, and share results with colleagues. Lab notebooks contain varied data: structured spreadsheets, unstructured images and text, and everything in between. The Pegasus platform's open standard makes it ideal for AI extensions: developers can use local LLM frameworks (like Ollama) to analyze notebook data, incorporate domain knowledge graphs to improve reasoning, draw on community protocol databases (Bio-protocol), or even create local AI agents akin to OpenClaw that automate lab tasks. This guide should spark ideas for modules that link life-science knowledge, AI models, and the rich content of the ELN to advance research productivity and reproducibility.</p>
+<h2 id="references-and-further-reading-1"><a class="header" href="#references-and-further-reading-1">References and further reading</a></h2>
+<ul>
+<li><a href="https://www.nnlm.gov/guides/data-glossary/electronic-laboratory-notebook-eln">Electronic Laboratory Notebook (ELN) | NNLM</a></li>
+<li><a href="https://datamanagement.hms.harvard.edu/collect-analyze/electronic-lab-notebooks">Electronic Lab Notebooks | Data Management</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Electronic_lab_notebook">Electronic lab notebook - Wikipedia</a></li>
+<li><a href="https://erikaaldendeb.substack.com/p/an-ai-ready-lab-notebook-for-life">An AI-ready lab notebook for life science</a></li>
+<li><a href="https://www.labvantage.com/blog/taming-big-data-with-an-electronic-lab-notebook-eln/">Taming Big Data with an Electronic Lab Notebook (ELN) - LabVantage</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11189195/">Ten simple rules for implementing electronic lab notebooks (ELNs) - PMC</a></li>
+<li><a href="https://thoughtbot.com/blog/how-to-use-open-source-LLM-model-locally">How to use an open source LLM model locally and remotely</a></li>
+<li><a href="https://www.sciencedirect.com/science/article/pii/S1570826824000398">LLM experimentation through knowledge graphs - ScienceDirect</a></li>
+<li><a href="https://www.scientificamerican.com/article/moltbot-is-an-open-source-ai-agent-that-runs-your-computer/">OpenClaw is an open-source AI agent that runs your computer | Scientific American</a></li>
+<li><a href="https://www.wired.com/story/clawdbot-moltbot-viral-ai-assistant/">Moltbot Is Taking Over Silicon Valley | WIRED</a></li>
+<li><a href="https://en.bio-protocol.org/en/about/">Bio-protocol (en.bio-protocol.org)</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4993360/">Protocols.io: Virtual Communities for Protocol Development and Discussion - PMC</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pegasus-api"><a class="header" href="#pegasus-api">Pegasus API</a></h1>
+<p><em>This chapter is <strong>TBA</strong> (to be announced).</em></p>
+<p>It will provide an API reference for building on Pegasus: endpoints, data formats, and how to read and write notebook data (protocols, molecules, images, tabular data) via the local API. Until then, see <a href="./chapter_2.html">Chapter 2: The ELN Open Standard</a> for the data model and structure, and the Pegasus project documentation for current API details.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="inspirations-and-learning"><a class="header" href="#inspirations-and-learning">Inspirations and Learning</a></h1>
+<p>Below is targeted research on ELNs (Electronic Lab Notebooks)—with creator archetypes and specific channels you can use for <strong>hackathon inspiration, content framing, and demo formats</strong>. The sections are grouped by <em>what hackathon participants can learn from them</em>, not just by popularity.</p>
+<h2 id="1-core-eln-tutorial-creators-directly-relevant"><a class="header" href="#1-core-eln-tutorial-creators-directly-relevant">1. Core ELN tutorial creators (directly relevant)</a></h2>
+<p>These creators explicitly explain <strong>how to use ELNs in real labs</strong>, which is ideal for onboarding hackathoners.</p>
+<h3 id="benchling-official-channel"><a class="header" href="#benchling-official-channel">Benchling (official channel)</a></h3>
+<ul>
+<li><strong>Content type:</strong> Product tutorials, workflows, biotech R&amp;D documentation practices</li>
+<li><strong>Why relevant:</strong> Shows canonical workflows used in industry and academia</li>
+<li><strong>Topics covered:</strong> Experiment tracking; protocol documentation; collaboration and sharing; inventory/sample management</li>
+<li><strong>Hackathon inspiration:</strong> How a UI should guide experiment logging; structured metadata fields (experiment type, reagents, results); collaborative commenting and review flows</li>
+</ul>
+<p><strong>Use for:</strong> Challenge prompts like <em>"Build a minimal Benchling-style ELN for synthetic biology experiments."</em></p>
+<h3 id="labstep-revvity"><a class="header" href="#labstep-revvity">Labstep (Revvity)</a></h3>
+<ul>
+<li><strong>Content type:</strong> ELN onboarding demos, lab digitization workflows</li>
+<li><strong>Why relevant:</strong> Shows operational lab digitization, compliance, and audit trails</li>
+<li><strong>Topics covered:</strong> Digital SOPs; compliance documentation; lab inventory + experiment linkage</li>
+<li><strong>Hackathon inspiration:</strong> Traceability features (who edited what, when); regulatory compliance metadata (timestamps, signatures)</li>
+</ul>
+<h2 id="2-academic--scientist-workflow-channels-indirect-eln-inspiration"><a class="header" href="#2-academic--scientist-workflow-channels-indirect-eln-inspiration">2. Academic / scientist workflow channels (indirect ELN inspiration)</a></h2>
+<p>These creators <strong>don't teach ELNs directly but show how scientists document work</strong>, which hackathoners can abstract into product features.</p>
+<h3 id="nilered"><a class="header" href="#nilered">NileRed</a></h3>
+<ul>
+<li><strong>Domain:</strong> Chemistry experiments</li>
+<li><strong>Why relevant:</strong> Extremely structured documentation mindset, clear protocols</li>
+<li><strong>ELN inspiration:</strong> Step-by-step protocol logging; safety notes and reagent tracking; experiment iterations and failures</li>
+</ul>
+<p><strong>Hackathon prompt example:</strong></p>
+<blockquote>
+<p>Build an ELN that tracks chemical reaction parameters and outcomes like NileRed's experiments.</p>
+</blockquote>
+<h3 id="the-thought-emporium"><a class="header" href="#the-thought-emporium">The Thought Emporium</a></h3>
+<ul>
+<li><strong>Domain:</strong> DIY biotech &amp; bioengineering</li>
+<li><strong>Why relevant:</strong> Real-world biotech experiments outside institutional labs</li>
+<li><strong>ELN inspiration:</strong> Open science documentation; experimental reproducibility; versioned experiment logs</li>
+</ul>
+<p><strong>Useful for:</strong> Citizen science / decentralized research ELN concepts.</p>
+<h3 id="dr-becky-astrophysics--other-science-vloggers"><a class="header" href="#dr-becky-astrophysics--other-science-vloggers">Dr. Becky (astrophysics) / other science vloggers</a></h3>
+<ul>
+<li><strong>Domain:</strong> Research workflow explanations</li>
+<li><strong>Why relevant:</strong> Shows research lifecycle thinking—hypothesis → experiment → iteration → publication</li>
+<li><strong>ELN inspiration:</strong> Linking hypotheses to experiments; narrative documentation (why an experiment was done)</li>
+</ul>
+<h2 id="3-research-workflow--productivity-channels-high-signal-for-hackathon-ux"><a class="header" href="#3-research-workflow--productivity-channels-high-signal-for-hackathon-ux">3. Research workflow &amp; productivity channels (high signal for hackathon UX)</a></h2>
+<p>These creators teach <strong>how researchers organize knowledge</strong>, which is exactly what ELNs digitize.</p>
+<h3 id="ali-abdaal--thomas-frank-knowledge-systems"><a class="header" href="#ali-abdaal--thomas-frank-knowledge-systems">Ali Abdaal / Thomas Frank (knowledge systems)</a></h3>
+<ul>
+<li><strong>Domain:</strong> Note-taking, research workflows</li>
+<li><strong>Why relevant:</strong> Not lab-specific but excellent for UX inspiration</li>
+<li><strong>ELN inspiration:</strong> Knowledge graphs; tagging systems; linking experiments to datasets and papers</li>
+</ul>
+<h3 id="obsidian--notion-scientific-workflow-creators"><a class="header" href="#obsidian--notion-scientific-workflow-creators">Obsidian / Notion scientific workflow creators</a></h3>
+<p>Search terms: "PhD workflow Notion", "Obsidian research workflow".</p>
+<ul>
+<li><strong>Why relevant:</strong> Many PhDs use general-purpose tools as ELN substitutes</li>
+<li><strong>Hackathon insight:</strong> ELNs should integrate with markdown, datasets, Git, and cloud storage</li>
+</ul>
+<h2 id="4-open-science--reproducibility-advocates-strategic-positioning"><a class="header" href="#4-open-science--reproducibility-advocates-strategic-positioning">4. Open science &amp; reproducibility advocates (strategic positioning)</a></h2>
+<p>These channels frame <strong>why ELNs matter</strong>, which is excellent for sponsor narrative.</p>
+<h3 id="open-science-foundation--reproducibility-youtubers"><a class="header" href="#open-science-foundation--reproducibility-youtubers">Open Science Foundation / reproducibility YouTubers</a></h3>
+<ul>
+<li><strong>Domain:</strong> Scientific reproducibility crisis</li>
+<li><strong>Why relevant:</strong> ELNs solve reproducibility and auditability</li>
+<li><strong>ELN inspiration:</strong> Experiment provenance tracking; dataset lineage; peer review annotations</li>
+</ul>
+<p><strong>Hackathon challenge angle:</strong></p>
+<blockquote>
+<p>Build an ELN feature that ensures experiments are reproducible and peer-reviewable.</p>
+</blockquote>
+<h2 id="5-eln-like-tools-tutorials-competitor--adjacent-platforms"><a class="header" href="#5-eln-like-tools-tutorials-competitor--adjacent-platforms">5. ELN-like tools tutorials (competitor / adjacent platforms)</a></h2>
+<p>These are <strong>not ELNs but act like them</strong> in practice.</p>
+<h3 id="jupyter-notebook-research-channels"><a class="header" href="#jupyter-notebook-research-channels">Jupyter notebook research channels</a></h3>
+<p>Search: "Research coding workflows Jupyter", "Lab notebook in Jupyter".</p>
+<ul>
+<li><strong>ELN inspiration:</strong> Computational experiment logging; code + results + plots in a single timeline; versioned execution states</li>
+</ul>
+<h3 id="git-for-scientists-tutorials"><a class="header" href="#git-for-scientists-tutorials">Git for scientists tutorials</a></h3>
+<ul>
+<li>Channels explaining Git in research; shows version control for experiments</li>
+<li><strong>Hackathon angle:</strong> Git-like versioning for wet lab experiments; branching experiment protocols</li>
+</ul>
+<h2 id="how-to-convert-this-into-hackathon-inspiration-tracks"><a class="header" href="#how-to-convert-this-into-hackathon-inspiration-tracks">How to convert this into hackathon inspiration tracks</a></h2>
+<p>You can structure hackathon prompts around <strong>creator-inspired workflows</strong>:</p>
+<h3 id="track-a-digital-lab-documentation-systems"><a class="header" href="#track-a-digital-lab-documentation-systems">Track A: Digital lab documentation systems</a></h3>
+<p>Inspired by Benchling, Labstep.</p>
+<ul>
+<li>Build an ELN MVP for biology or chemistry labs</li>
+<li>Focus on structured protocols, metadata, collaboration</li>
+</ul>
+<h3 id="track-b-experimental-knowledge-graphs"><a class="header" href="#track-b-experimental-knowledge-graphs">Track B: Experimental knowledge graphs</a></h3>
+<p>Inspired by Obsidian / Notion workflows.</p>
+<ul>
+<li>Link hypotheses → experiments → datasets → results</li>
+<li>Build semantic tagging and search</li>
+</ul>
+<h3 id="track-c-open-science--reproducibility"><a class="header" href="#track-c-open-science--reproducibility">Track C: Open science &amp; reproducibility</a></h3>
+<p>Inspired by open science creators.</p>
+<ul>
+<li>Build audit trails, provenance tracking, reproducibility reports</li>
+</ul>
+<h3 id="track-d-computational-experiment-notebooks"><a class="header" href="#track-d-computational-experiment-notebooks">Track D: Computational experiment notebooks</a></h3>
+<p>Inspired by Jupyter.</p>
+<ul>
+<li>Combine code, datasets, and results in a unified experiment timeline</li>
+</ul>
+<h2 id="key-patterns-to-emphasize-to-hackathoners"><a class="header" href="#key-patterns-to-emphasize-to-hackathoners">Key patterns to emphasize to hackathoners</a></h2>
+<p>From this research, ELNs are used for:</p>
+<ol>
+<li><strong>Protocol documentation</strong></li>
+<li><strong>Sample and reagent tracking</strong></li>
+<li><strong>Experiment metadata and outcomes</strong></li>
+<li><strong>Collaboration and review comments</strong></li>
+<li><strong>Compliance and audit trails</strong></li>
+<li><strong>Linking experiments to datasets and publications</strong></li>
+<li><strong>Versioning experimental workflows</strong></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="idea-bank-bioprotocol-and-decentralized-science"><a class="header" href="#idea-bank-bioprotocol-and-decentralized-science">Idea Bank: BioProtocol and Decentralized Science</a></h1>
+<p>This chapter is a single reference for hackathon and contributor ideas around <strong>open protocols</strong>, <strong>decentralized science (DeSci)</strong>, and <strong>reproducibility</strong>. It ties these themes to the Pegasus ELN: exporting and importing protocols, persistent identifiers, and open-notebook science.</p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>Protocol sharing and decentralized science matter for ELNs and reproducibility. When methods are findable, accessible, and reusable, other labs can replicate experiments and build on them. Open-notebook and DeSci approaches extend this idea: making data and protocols public (including failures), using persistent identifiers, and sometimes tokenizing or decentralizing research infrastructure. Pegasus’s open data format and local API make it a good fit for plugins that link notebook entries to community protocol libraries, publish protocols with persistent IDs, or sync select content to public repositories.</p>
+<h2 id="bio-protocol-the-protocol-repository"><a class="header" href="#bio-protocol-the-protocol-repository">Bio-protocol (the protocol repository)</a></h2>
+<p><strong>Bio-protocol</strong> (<a href="https://en.bio-protocol.org">en.bio-protocol.org</a>) is an online, peer-reviewed protocol journal that curates and hosts high-quality, free-access, step-by-step protocols across the life sciences. It was launched in 2011 by a group of Stanford postdoctoral researchers to address a core problem: the methods sections of research articles are often brief and incomplete, making it difficult to replicate experiments without extensive troubleshooting.</p>
+<h3 id="what-bio-protocol-provides"><a class="header" href="#what-bio-protocol-provides">What Bio-protocol provides</a></h3>
+<ul>
+<li><strong>Peer-reviewed protocols</strong> in categories such as molecular biology, cell biology, systems biology, microbiology, immunology, neuroscience, plant science, cancer biology, and others.</li>
+<li><strong>Preprint repository and Exchange</strong> — for sharing and discussing protocols before or alongside formal publication.</li>
+<li><strong>Webinars</strong> — for discussing methods and technologies.</li>
+<li><strong>Editorial model</strong> — editorial and review boards are largely made up of postdocs, early-career faculty, and staff scientists who actively design and conduct experiments, which helps keep protocols practical and clear.</li>
+</ul>
+<p>Bio-protocol’s vision is to improve reproducibility by sharing detailed methods and fostering direct communication among researchers. The organization aims not only to be a database of reliable protocols but also a community platform for sharing ideas and promoting good research practices.</p>
+<h3 id="integrating-with-pegasus"><a class="header" href="#integrating-with-pegasus">Integrating with Pegasus</a></h3>
+<ul>
+<li><strong>Query published protocols</strong> — By protocol name or category, a Pegasus plugin could retrieve matching Bio-protocol (or protocols.io) entries and suggest them when a user is drafting a method in the ELN.</li>
+<li><strong>Compare lab procedures to standards</strong> — Check whether a lab’s written procedure aligns with a published standard (e.g. same key steps, reagents) and flag gaps or deviations.</li>
+<li><strong>Export for submission or sharing</strong> — Allow users to export a protocol from Pegasus in a form suitable for submission to Bio-protocol, or for sharing via protocols.io or other open databases, so the global “distributed science” community can reuse and cite it.</li>
+</ul>
+<h2 id="decentralized-science-desci-and-open-notebook-science"><a class="header" href="#decentralized-science-desci-and-open-notebook-science">Decentralized science (DeSci) and open-notebook science</a></h2>
+<h3 id="open-notebook-science"><a class="header" href="#open-notebook-science">Open-notebook science</a></h3>
+<p><strong>Open-notebook science</strong> is the practice of making research data and methods public in real time, including failed experiments and raw notes. Benefits include earlier feedback, stronger provenance, and a shared record that others can build on. ELNs are a natural place to implement open-notebook practices: select notebook entries or protocols can be synced to public repositories or wikis, with clear licensing and persistent identifiers.</p>
+<h3 id="blockchain-and-tokenized-research-desci"><a class="header" href="#blockchain-and-tokenized-research-desci">Blockchain and tokenized research (DeSci)</a></h3>
+<p><strong>Decentralized science (DeSci)</strong> uses blockchain and related technologies to fund, share, and sometimes tokenize research. <strong>Bio Protocol (BIO)</strong> is one example of a blockchain-based DeSci platform where research can be shared and tokenized (as referenced in <a href="./chapter_1.html">Chapter 1</a>). It is <strong>distinct from</strong> the Bio-protocol journal/repository above: the former is a DeSci/token platform; the latter is a peer-reviewed protocol journal and community site.</p>
+<p>For hackathon ideas, “publishing” parts of a lab notebook onto a decentralized network could mean: saving a protocol or dataset with a persistent identifier (e.g. DOI, or a blockchain-anchored ID), or designing a bridge between Pegasus and a DeSci platform so that selected ELN content can be registered or shared there. The exact design depends on which DeSci platform and standards you target.</p>
+<h2 id="hackathon-idea-bank"><a class="header" href="#hackathon-idea-bank">Hackathon idea bank</a></h2>
+<p>Concrete project ideas that combine Pegasus with open protocols and DeSci/open science:</p>
+<ul>
+<li><strong>Sync select ELN entries to a public repo or wiki</strong> — Let users choose which experiments or protocols to publish; export to a public repository or wiki with metadata and (where applicable) persistent IDs; enable community feedback or versioning.</li>
+<li><strong>Publish protocols with persistent identifiers</strong> — From a Pegasus protocol entry, generate a minimal, citable package (e.g. RO-Crate or similar) and register it to get a DOI or other persistent ID so others can cite and reuse it.</li>
+<li><strong>Link notebook entries to Bio-protocol or protocols.io</strong> — When writing a protocol in Pegasus, search Bio-protocol or protocols.io by name or key step; embed a link or citation to the published protocol; optionally check alignment with that standard.</li>
+<li><strong>Reproducibility report</strong> — A tool that checks protocol completeness against community standards (e.g. required fields, materials, step clarity) and produces a short “reproducibility readiness” report for an experiment or protocol.</li>
+<li><strong>Contribute Pegasus protocols to open databases</strong> — A one-click or guided flow to export a protocol from Pegasus in a format suitable for submission to Bio-protocol, protocols.io, or another open database, with proper attribution and licensing.</li>
+</ul>
+<p>These ideas keep data sovereignty in mind: optional publishing and clear user control over what is shared and where.</p>
+<h2 id="references-and-further-reading-2"><a class="header" href="#references-and-further-reading-2">References and further reading</a></h2>
+<ul>
+<li><a href="https://en.bio-protocol.org/en/about">Bio-protocol: About Us</a> — Aims, scope, editorial model, and community.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4993360/">Protocols.io: Virtual Communities for Protocol Development and Discussion - PMC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Open-notebook_science">Open-notebook science - Wikipedia</a></li>
+<li><a href="https://help.wealthsimple.com/hc/en-ca/articles/41701045785883-Bio-Protocol-BIO">Bio Protocol (BIO) – Help Centre</a> — DeSci/token platform (distinct from Bio-protocol journal).</li>
+<li><a href="./chapter_1.html">Chapter 1: Open/Distributed Science</a> — Related hackathon ideas in this book.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="idea-bank-labop"><a class="header" href="#idea-bank-labop">Idea Bank: LabOP</a></h1>
+<p>This chapter explains the <strong>LabOP</strong> protocol standard in depth and how it fits with the Pegasus ELN. It is a single reference for implementers and hackathon teams working on protocol interoperability and automation.</p>
+<h2 id="what-is-labop"><a class="header" href="#what-is-labop">What is LabOP?</a></h2>
+<p><strong>LabOP</strong> is an ontology and schema for representing <strong>laboratory protocols</strong> in a machine-readable way. Goals include:</p>
+<ul>
+<li><strong>Reproducibility</strong> — Protocols can be shared, versioned, and compared in a standard form.</li>
+<li><strong>Automation</strong> — Protocol representations can drive or interface with lab automation (e.g. liquid handlers, sequencers) and execution pipelines.</li>
+<li><strong>Interoperability</strong> — Tools and ELNs that speak LabOP can exchange protocol structure (steps, parameters, reagents, equipment) without proprietary formats.</li>
+</ul>
+<p>LabOP is typically expressed in <strong>JSON-LD</strong> and is aligned with semantic-web and ontology practices so that protocols can be linked to samples, parameters, and equipment in a consistent way. The schema is referenced at <strong>https://labop.org/schema</strong>; implementers should check <a href="https://labop.org">labop.org</a> for the latest schema and documentation.</p>
+<h2 id="labop-in-the-pegasus-standard"><a class="header" href="#labop-in-the-pegasus-standard">LabOP in the Pegasus standard</a></h2>
+<p>The Pegasus ELN XML standard embeds LabOP protocol content inside a <code>&lt;protocol&gt;</code> element. The protocol is stored <strong>verbatim</strong> as JSON-LD inside a <code>&lt;labop&gt;</code> child, with a schema reference. This keeps the ELN format tool-agnostic while allowing any LabOP-aware tool to parse the embedded protocol.</p>
+<p>From <a href="./chapter_2.html#8-protocol-support-labop">Chapter 2: Protocol Support (LabOP)</a>:</p>
+<pre><code class="language-xml">&lt;protocol id="urn:lab:protocol:ampicillin-test" title="Ampicillin MIC" version="1.0"&gt;
+  &lt;labop format="json-ld" schema="https://labop.org/schema"&gt;
+    {
+      "@type": "Protocol",
+      "name": "Ampicillin MIC Test",
+      "steps": [
+        { "description": "Prepare bacterial culture" },
+        { "description": "Add antibiotic gradient" }
+      ]
+    }
+  &lt;/labop&gt;
+&lt;/protocol&gt;
+</code></pre>
+<p><strong>What gets stored:</strong></p>
+<ul>
+<li><strong>Notebook-side:</strong> A protocol container with an optional <code>id</code>, <code>title</code>, and <code>version</code>, plus the raw LabOP payload (format <code>json-ld</code>, schema URL).</li>
+<li><strong>Inside the payload:</strong> Protocol name, steps (with descriptions and, in full LabOP, parameters, reagents, equipment), and any other fields the LabOP schema defines. The ELN does not mandate a specific LabOP version; the schema URL indicates which schema the payload conforms to.</li>
+</ul>
+<p>This design supports: (1) human-readable protocol titles and versions in the ELN, (2) machine-readable protocol structure for automation and validation, and (3) future evolution of the LabOP schema without breaking the ELN container.</p>
+<h2 id="core-concepts"><a class="header" href="#core-concepts">Core concepts</a></h2>
+<p>Concepts that commonly appear in LabOP and map well to ELN entities:</p>
+<ul>
+<li><strong>Protocol</strong> — A named, versioned procedure (e.g. "Ampicillin MIC Test"). In the ELN, this is the top-level experiment or method.</li>
+<li><strong>Steps</strong> — Ordered actions (e.g. "Prepare bacterial culture", "Add antibiotic gradient"). Can carry parameters, timing, and references to reagents or equipment.</li>
+<li><strong>Parameters</strong> — Inputs that can vary between runs (e.g. concentration, temperature, duration). Map to ELN metadata or structured fields.</li>
+<li><strong>Reagents / materials</strong> — Substances used in the protocol. Can be linked to inventory or sample IDs in the ELN.</li>
+<li><strong>Equipment</strong> — Instruments or devices. Can be linked to instrument metadata or calibration records.</li>
+</ul>
+<p>Together, these support <strong>experiment lineage</strong>: which protocol was used, which samples and reagents, and which parameters—so that results can be traced back to a precise, machine-readable protocol. Execution or simulation of protocols (e.g. by lab robotics or simulation engines) is an extension of this ecosystem; the Pegasus standard focuses on storing and referencing the protocol, not on defining execution semantics.</p>
+<h2 id="hackathon-idea-bank-1"><a class="header" href="#hackathon-idea-bank-1">Hackathon idea bank</a></h2>
+<p>Project ideas that combine Pegasus and LabOP:</p>
+<ul>
+<li><strong>Validate ELN protocol entries against LabOP schema</strong> — When a user adds or edits a <code>&lt;labop&gt;</code> block, validate the JSON-LD against the declared LabOP schema and report missing required fields or invalid structure.</li>
+<li><strong>Convert free-text protocols to LabOP JSON-LD</strong> — Use a local LLM or rule-based parser to turn a free-text protocol (e.g. from a notebook section) into a draft LabOP structure that the user can review and store in the ELN.</li>
+<li><strong>Protocol diff</strong> — Compare two protocol versions (e.g. two <code>&lt;protocol&gt;</code> elements or two LabOP JSON-LD blobs) and produce a human-readable or structured diff (steps added/removed/changed, parameters changed).</li>
+<li><strong>Integrate with automation/execution pipelines</strong> — Build a bridge that reads LabOP from Pegasus (via API or export) and feeds it into an execution engine or scheduler (e.g. for liquid handling or sequencing runs), so that “run this protocol” is driven by the same representation stored in the ELN.</li>
+<li><strong>Auto-suggest protocol steps from past notebook entries</strong> — Use past experiments and their protocol steps (either already in LabOP or extracted from text) to suggest the next step or a template protocol for a new experiment, using a local model and Pegasus data only.</li>
+</ul>
+<p>These ideas assume protocols are (or can be) stored in the Pegasus format shown in <a href="./chapter_2.html">Chapter 2</a>; validation and conversion should respect the <code>schema</code> URL and the JSON-LD format.</p>
+<h2 id="references-and-further-reading-3"><a class="header" href="#references-and-further-reading-3">References and further reading</a></h2>
+<ul>
+<li><strong>LabOP schema</strong> — <a href="https://labop.org/schema">https://labop.org/schema</a>; check <a href="https://labop.org">labop.org</a> for current documentation and schema versions.</li>
+<li><a href="./chapter_2.html">Chapter 2: The ELN Open Standard</a> — Section 8 (Protocol Support (LabOP)) and design philosophy.</li>
+<li><strong>Pegasus ELN standard</strong> — Full ELN XML specification (e.g. <code>standard.md</code> in the repository) including the protocol container and LabOP embedding.</li>
+</ul>
+<hr />
+<p><em>© Aegion Dynamic. <a href="./copyright.html">Copyright and Legal Notice</a></em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="copyright-and-legal-notice"><a class="header" href="#copyright-and-legal-notice">Copyright and Legal Notice</a></h1>
+<h2 id="copyright"><a class="header" href="#copyright">Copyright</a></h2>
+<p>© <strong>Aegion Dynamic</strong>. All rights reserved.</p>
+<p>This work—<em>Pegasus for Dummies</em>—including all text, structure, and original materials in this book and repository, is protected by copyright and related rights. <strong>All rights reserved.</strong> Others are not permitted to reuse the name, materials, or any substantial part of this work without prior written permission from Aegion Dynamic. Full terms and restrictions are in the <a href="https://github.com/pegasus-eln/pegasus-for-dummies/blob/main/LICENSE">LICENSE</a> file in the repository.</p>
+<h2 id="repository"><a class="header" href="#repository">Repository</a></h2>
+<p>This book is maintained in the following repository:</p>
+<ul>
+<li><strong>Repository:</strong> <a href="https://github.com/pegasus-eln/pegasus-for-dummies">pegasus-for-dummies</a> (or the canonical URL where this project is hosted)</li>
+<li><strong>Author:</strong> Radhakrishna Sanka</li>
+<li><strong>Copyright holder:</strong> Aegion Dynamic</li>
+</ul>
+<p>Use, copying, distribution, and modification of the materials are not permitted without written permission from Aegion Dynamic. See the LICENSE file in the repository root for full terms. Contributions and feedback may be welcome under separate agreement; contact Aegion Dynamic.</p>
+<h2 id="trademarks-and-third-party-rights"><a class="header" href="#trademarks-and-third-party-rights">Trademarks and third-party rights</a></h2>
+<p><strong>Pegasus</strong> and related project names may be trademarks or project names of their respective owners. This book is an independent ecosystem contributor guide and is not officially affiliated with or endorsed by those projects unless stated. All other product or service names mentioned may be trademarks of their respective owners.</p>
+<h2 id="no-warranty"><a class="header" href="#no-warranty">No warranty</a></h2>
+<p>This book is provided “as is” for educational and ecosystem-contribution purposes. Aegion Dynamic and the authors do not warrant accuracy, completeness, or fitness for any particular use. Use of the Pegasus standard, APIs, and tools described herein is at your own risk.</p>
+<hr />
+<p><em>Last updated: 2025. For the latest copyright and license terms, see the repository.</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>
