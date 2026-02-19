@@ -302,13 +302,13 @@ Supports:
 
 Recommended pattern:
 
-```
+```text
 urn:lab:{type}:{identifier}
 ```
 
 Examples:
 
-```
+```text
 urn:lab:notebook:assay-2026-01
 urn:lab:container:results
 urn:lab:table:assay-results
