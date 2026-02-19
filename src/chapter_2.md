@@ -1,6 +1,6 @@
 # The ELN Open Standard
 
-This chapter describes the XML-based Electronic Lab Notebook (ELN) standard that underpins Pegasus and compatible tools. It provides structured scientific documentation, addressable data, protocol interoperability, and semantic extensibility while remaining machine-readable, AI-compatible, and tool-agnostic.
+This chapter describes the XML-based Electronic Lab Notebook (ELN) standard that underpins Pegasus and compatible tools. It provides structured scientific documentation, addressable data, protocol interoperability, and semantic extensibility while remaining machine-readable, AI-compatible, and tool-agnostic. A dedicated [Pegasus API](./chapter_5.md) chapter (TBA) will document the local API and endpoints for reading and writing this data.
 
 ---
 
