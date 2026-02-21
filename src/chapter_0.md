@@ -1,5 +1,10 @@
 # Start Here
 
+![Aegion Dynamic logo (light)](./images/eln-guide/aegion-logo.svg)
+![Aegion Dynamic logo (dark)](./images/eln-guide/aegion-logo-dark.svg)
+
+*Use the light logo on light backgrounds; use the dark logo on dark backgrounds.*
+
 This book is the **open source ecosystem contributor guide** for **Pegasus**, an open standard Electronic Lab Notebook (ELN) system. It sets context for ELNs and AI in life sciences, explains the ELN open standard, and supports hackathon participants and implementers building on Pegasus.
 
 ## Who this is for

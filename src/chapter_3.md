@@ -259,3 +259,7 @@ This makes it **an extremely rich target for AI plugins**.
 ## Positioning for Pegasus
 
 > Pegasus is a local-first, open-standard ELN platform that exposes this scientific operational data via a local API. This buildathon invites participants to explore how AI systems can interact with structured scientific workflows, build intelligent assistants, and create new interfaces for distributed scientific knowledge.
+
+---
+
+*© Aegion Dynamic. See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*

@@ -56,3 +56,7 @@ These ideas keep data sovereignty in mind: optional publishing and clear user co
 - [Open-notebook science - Wikipedia](https://en.wikipedia.org/wiki/Open-notebook_science)
 - [Bio Protocol (BIO) – Help Centre](https://help.wealthsimple.com/hc/en-ca/articles/41701045785883-Bio-Protocol-BIO) — DeSci/token platform (distinct from Bio-protocol journal).
 - [Chapter 1: Open/Distributed Science](./chapter_1.md) — Related hackathon ideas in this book.
+
+---
+
+*© Aegion Dynamic. See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*

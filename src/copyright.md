@@ -1,5 +1,19 @@
 # Copyright and Legal Notice
 
+## Aegion Dynamic logos
+
+The following logos are the official Aegion Dynamic branding assets for use in connection with this guide and related materials:
+
+| Context | Asset |
+|--------|--------|
+| **Light backgrounds** | [aegion-logo.svg](./images/eln-guide/aegion-logo.svg) |
+| **Dark backgrounds** | [aegion-logo-dark.svg](./images/eln-guide/aegion-logo-dark.svg) |
+
+![Aegion Dynamic (light)](./images/eln-guide/aegion-logo.svg)
+![Aegion Dynamic (dark)](./images/eln-guide/aegion-logo-dark.svg)
+
+Use the light logo on light backgrounds and the dark logo on dark backgrounds. Use of these logos is subject to the same terms as the rest of this work (see below).
+
 ## Copyright
 
 © **Aegion Dynamic**. All rights reserved.
