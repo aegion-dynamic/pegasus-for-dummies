@@ -8,6 +8,20 @@ This book is the **open source ecosystem contributor guide** for **Pegasus**, an
 - **Hackathon and buildathon participants** — teams building AI modules, plugins, or tools that use ELN data
 - **Implementers** — developers adopting the open standard or building compatible tools
 
+## Pegasus overview
+
+The Pegasus ELN desktop app uses an IDE-like layout: a left sidebar for navigation and file management, and a main area for editing and viewing content. The welcome screen helps you get started; once you add workspaces, you'll use the same layout for your lab notebooks.
+
+![Pegasus ELN Desktop layout](./images/eln-guide/pegasus-layout.png)
+
+**Main elements:**
+
+- **File Pane** — The **WORKSPACES** section in the left sidebar. It shows a hierarchical file tree of your projects and files (e.g. folders, `.eln` notebooks, `.md`, images). Use it to open files, organize projects, and track what you're working on.
+- **Agents** — Accessed via the sidebar (e.g. the person/assistant icon). Agents help you work with your notebook content using AI—search, summarization, or task automation from within the app.
+- **Knowledge Index** — The stacked-documents/database icon in the sidebar. It indexes your workspace content so you can search across files and use that context with agents and smart search.
+- **Command Palette** — Press **Cmd/Ctrl+K** (or use the "Open Command Palette" option) for quick access to features and commands without hunting through menus.
+- **Workspace Management** — Add and switch between workspaces from the sidebar. Each workspace is a root folder (e.g. a project or lab); the file tree under WORKSPACES reflects the files in the active workspace. Use "Add a Workspace" to track your first (or additional) project folders.
+
 ## How to use this book
 
 | Chapter | What you'll find |
