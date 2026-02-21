@@ -392,3 +392,7 @@ It is designed to be:
 - Tool-agnostic
 
 Possible next steps for the ecosystem include a JSON representation of the standard, a validation checklist for implementers, a compliance mapping (e.g., FDA / ISO), and a versioned governance model for evolving the standard.
+
+---
+
+*© [Aegion Dynamic](https://aegiondynamic.com). See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*

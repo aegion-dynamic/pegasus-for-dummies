@@ -137,3 +137,7 @@ From this research, ELNs are used for:
 5. **Compliance and audit trails**
 6. **Linking experiments to datasets and publications**
 7. **Versioning experimental workflows**
+
+---
+
+*© [Aegion Dynamic](https://aegiondynamic.com). See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*

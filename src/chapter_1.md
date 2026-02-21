@@ -95,3 +95,7 @@ Each of these ideas leverages the open, local architecture of the Pegasus ELN. B
 - [Constructing knowledge graphs and their biomedical applications - PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC7327409/)
 - [Bio Protocol (BIO) – Help Centre](https://help.wealthsimple.com/hc/en-ca/articles/41701045785883-Bio-Protocol-BIO)
 - [Open-notebook science - Wikipedia](https://en.wikipedia.org/wiki/Open-notebook_science)
+
+---
+
+*© [Aegion Dynamic](https://aegiondynamic.com). See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*
