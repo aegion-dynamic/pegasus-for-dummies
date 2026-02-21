@@ -97,7 +97,3 @@ An ELN is a digital lab notebook that captures all aspects of scientific experim
 - [Moltbot Is Taking Over Silicon Valley | WIRED](https://www.wired.com/story/clawdbot-moltbot-viral-ai-assistant/)
 - [Bio-protocol (en.bio-protocol.org)](https://en.bio-protocol.org/en/about/)
 - [Protocols.io: Virtual Communities for Protocol Development and Discussion - PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC4993360/)
-
----
-
-*© Aegion Dynamic. See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*

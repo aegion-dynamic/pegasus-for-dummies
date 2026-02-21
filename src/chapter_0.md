@@ -1,9 +1,8 @@
 # Start Here
 
-![Aegion Dynamic logo (light)](./images/eln-guide/aegion-logo.svg)
-![Aegion Dynamic logo (dark)](./images/eln-guide/aegion-logo-dark.svg)
+[![Aegion Dynamic logo](./images/eln-guide/aegion-logo-dark.svg)](https://aegiondynamic.com)
 
-*Use the light logo on light backgrounds; use the dark logo on dark backgrounds.*
+**Aegion Dynamic:** [https://aegiondynamic.com](https://aegiondynamic.com)
 
 This book is the **open source ecosystem contributor guide** for **Pegasus**, an open standard Electronic Lab Notebook (ELN) system. It sets context for ELNs and AI in life sciences, explains the ELN open standard, and supports hackathon participants and implementers building on Pegasus.
 
@@ -58,7 +57,3 @@ Weighted total (max 5.0): **4.2+** winning, **3.8–4.1** strong finalist, **&lt
 - **Implement the standard or build on the API** → Go to [Chapter 2](./chapter_2.md).
 - **Prepare for the hackathon** → Read [Chapters 3–4](./chapter_3.md) (ELNs at Work, Hackathon Guide) and the evaluation notes there; then [Chapters 6–8](./chapter_6.md) (Inspirations, Idea Banks).
 - **Explore idea banks** → See [Chapter 7](./chapter_7.md) (BioProtocol / DeSci) and [Chapter 8](./chapter_8.md) (LabOP).
-
----
-
-*© Aegion Dynamic. See [Copyright and Legal Notice](./copyright.md) for full terms and repository information.*

@@ -69,7 +69,3 @@ These ideas assume protocols are (or can be) stored in the Pegasus format shown 
 - **LabOP schema** — [https://labop.org/schema](https://labop.org/schema); check [labop.org](https://labop.org) for current documentation and schema versions.
 - [Chapter 2: The ELN Open Standard](./chapter_2.md) — Section 8 (Protocol Support (LabOP)) and design philosophy.
 - **Pegasus ELN standard** — Full ELN XML specification (e.g. `standard.md` in the repository) including the protocol container and LabOP embedding.
-
----
-
-*© Aegion Dynamic. [Copyright and Legal Notice](./copyright.md)*
